@@ -1,4 +1,6 @@
 ﻿using System;
+using TP02;
+
 namespace Aydin_Isamettin_Tp1
 {
     public class Player
@@ -14,8 +16,15 @@ namespace Aydin_Isamettin_Tp1
             FirstName = Format(firstName);
             LastName = Format(lastName);
             Alias = alias;
-            //7.1
-            MySpaceship = new Spaceship();
+            MySpaceship = new Dart();
+        }
+
+        public Player(string firstName, string lastName, string alias, Spaceship spaceship)
+        {
+            FirstName = Format(firstName);
+            LastName = Format(lastName);
+            Alias = alias;
+            MySpaceship = spaceship;
         }
 
         private static string Format(string str)

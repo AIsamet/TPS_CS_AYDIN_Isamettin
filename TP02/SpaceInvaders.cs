@@ -1,4 +1,6 @@
 ﻿using System;
+using TP02;
+
 namespace Aydin_Isamettin_Tp1
 {
     public class SpaceInvaders
@@ -22,36 +24,22 @@ namespace Aydin_Isamettin_Tp1
             }
             Console.Write("\n");
 
-            //ARMES DU VAISSEAU DU JOUEUR JOHN DOE
-            myGame.Players[0].MySpaceship.ViewWeapons();
+            //VAISSEAU 1
+            Spaceship spaceship = new Rocinante("Faucon Millenium");
+            myGame.Players.Add(new Player("Isamettin", "Aydin", "iSayD", spaceship));
 
-            //CREATION D'UNE NOUVELLE ARME
-            Weapon myWeapon = new Weapon("Annihilateur lourd", 80, 100, Weapon.EWeaponType.Guided, 2);
-
-            //AJOUT DE L'ARME A L'ARMURERIE
-            myGame.GameArmory.AddWeapon(myWeapon);
-
-            //AFFICHAGE DES ARMES L'ARMURERIE
-            myGame.GameArmory.ViewArmory();
-
-            //REESSAI D'AJOUTE L'ARME APRES L'AVOIR AJOUTE DANS L'ARMURERIE
-            try
-            {
-                //myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Annihilateur lourd"));
-                myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Rayon laser"));
-                myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Mitrailleuse"));
-                myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Lance missile"));
-            }
-            catch (ArmoryException e)
-            {
-                Console.WriteLine("Erreur ArmoryException: {0}", e.Message);
-            }
 
             //ARMES DU VAISSEAU DU JOUEUR JOHN DOE
+            Console.WriteLine("======== ARME DU JOUEUR JOHN DOE ========");
             myGame.Players[0].MySpaceship.ViewWeapons();
 
-            //ESSAI DE LA FONCTION SHOOT
-            myGame.Players[0].MySpaceship.WeaponsList[1].Shoot();
+            //ATTAQUE DE JOHN DOE SUR LE VAISSEAU 1
+            Console.WriteLine("======== ATTAQUE DU VAISSEAU 1 PAR JOHN DOE ========");
+            myGame.Players[0].MySpaceship.ShootTarget(myGame.Players[3].MySpaceship);
+            myGame.Players[0].MySpaceship.ShootTarget(myGame.Players[3].MySpaceship);
+
+            myGame.Players[3].MySpaceship.ViewShip();
+
         }
 
         private void Init()

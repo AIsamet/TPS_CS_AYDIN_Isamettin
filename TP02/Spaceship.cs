@@ -1,14 +1,19 @@
 ﻿using System;
 namespace Aydin_Isamettin_Tp1
 {
-    public class Spaceship
+    //2.1
+    public abstract class Spaceship
     {
-        private bool isDestroyed;
-        private int currentStructure;
-        private int MaxStructure { get; set; }
-        private int MaxShield { get; set; }
-        public int CurrentShield { get; set; }
-        public int CurrentStructure
+        
+        protected string Name { get; set; }
+        
+        protected bool isDestroyed;
+        
+        protected int currentStructure;
+        protected int MaxStructure { get; set; }
+        protected int MaxShield { get; set; }
+        protected int CurrentShield { get; set; }
+        protected int CurrentStructure
         {
             get
             {
@@ -24,7 +29,7 @@ namespace Aydin_Isamettin_Tp1
                 }
             }
         }
-        public bool IsDestroyed
+        protected bool IsDestroyed
         {
             get
             {
@@ -34,21 +39,30 @@ namespace Aydin_Isamettin_Tp1
                 }
                 else return false;
             }
-            private set
+            set
             {
                 isDestroyed = value;
             }
         }
 
-
-        public List<Weapon> WeaponsList { get; private set; }
+        public List<Weapon> WeaponsList { get; protected set; }
 
         public Spaceship()
         {
             MaxStructure = 100;
             MaxShield = 100;
-            CurrentShield = 100;
-            CurrentStructure = 100;
+            CurrentStructure = MaxStructure;
+            CurrentShield = MaxShield;
+            WeaponsList = new List<Weapon>();
+        }
+
+        public Spaceship(string name)
+        {
+            Name = name;
+            MaxStructure = 100;
+            MaxShield = 100;
+            CurrentStructure = MaxStructure;
+            CurrentShield = MaxShield;
             WeaponsList = new List<Weapon>();
         }
 
@@ -118,11 +132,40 @@ namespace Aydin_Isamettin_Tp1
 
         public void ViewShip()
         {
-            Console.WriteLine("Point de structure maximum : " + MaxStructure);
-            Console.WriteLine("Point de bouclier maximum : " + MaxShield);
-            Console.WriteLine("Point de structure courrant : " + CurrentStructure);
-            Console.WriteLine("Point de bouclier courrant : " + CurrentShield);
+            Console.WriteLine("======== INFOS VAISSEAU ========");
+            Console.WriteLine("Point de bouclier : " + CurrentShield + "/" + MaxShield);
+            Console.WriteLine("Point de structure : " + CurrentStructure + "/" + MaxStructure);
+            if (IsDestroyed) { Console.WriteLine("Le vaisseau est détruit"); }
             ViewWeapons();
         }
+
+        //2.3
+        public virtual void TakeDamages(Weapon weapon)
+        {
+            if (CurrentShield > 0)
+            {
+                CurrentShield -= weapon.Shoot();
+                if (CurrentShield < 0)
+                {
+                    CurrentStructure += CurrentShield;
+                    CurrentShield = 0;
+                    if (CurrentStructure < 0)
+                    {
+                        CurrentStructure = 0;
+                    }
+                }
+            }
+            else
+            {
+                CurrentStructure -= weapon.Shoot();
+                if (CurrentStructure < 0)
+                {
+                    CurrentStructure = 0;
+                }
+            }
+        }
+
+        //2.4
+        public abstract void ShootTarget(Spaceship target);
     }
 }
