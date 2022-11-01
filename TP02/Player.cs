@@ -16,7 +16,7 @@ namespace Aydin_Isamettin_Tp1
             FirstName = Format(firstName);
             LastName = Format(lastName);
             Alias = alias;
-            MySpaceship = new Dart();
+            MySpaceship = new ViperMKII();
         }
 
         public Player(string firstName, string lastName, string alias, Spaceship spaceship)

@@ -44,6 +44,7 @@ namespace Aydin_Isamettin_Tp1
         {
             //3.a
             TimeBeforReload -= 1;
+            if (TimeBeforReload < 0) { TimeBeforReload = 0; }
 
             //3.c         
             if (TimeBeforReload == 0)
@@ -59,14 +60,15 @@ namespace Aydin_Isamettin_Tp1
                     {
                         degats = 0;
                         Console.WriteLine("l'arme " + name + " a raté sa cible\n");
+                        TimeBeforReload = ReloadTime;
                         return degats;
                     }
                     else
                     {
                         Console.WriteLine("l'arme " + name + " tire sur sa cible (degats estimés = " + degats + ")\n");
+                        TimeBeforReload = ReloadTime;
                         return degats;
                     }
-                    TimeBeforReload = ReloadTime;
                 }
 
                 //3.d.2
@@ -77,15 +79,16 @@ namespace Aydin_Isamettin_Tp1
                     {
                         degats = 0;
                         Console.WriteLine("l'arme " + name + " a raté sa cible\n");
+                        TimeBeforReload = ReloadTime * 2;
                         return degats;
                     }
                     else
                     {
                         degats = degats * 2;
                         Console.WriteLine("l'arme " + name + " tire sur sa cible (degats estimés = " + degats + ")\n");
+                        TimeBeforReload = ReloadTime * 2;
                         return degats;
                     }
-                    TimeBeforReload = ReloadTime * 2;
                 }
 
                 //3.d.3
@@ -93,14 +96,13 @@ namespace Aydin_Isamettin_Tp1
                 {
                     degats = MinDamage;
                     Console.WriteLine("l'arme " + name + " tire sur sa cible (degats estimés = " + degats + ")\n");
-                    return degats;
-
                     TimeBeforReload = ReloadTime;
+                    return degats;
                 }
             }
 
             //3.b
-            Console.WriteLine("L'arme " + name + " est entrain de recharger\n");
+            Console.WriteLine("L'arme " + name + " est entrain de recharger\nTours avant rechargement : " + TimeBeforReload + "\n");
             return 0;
 
         }

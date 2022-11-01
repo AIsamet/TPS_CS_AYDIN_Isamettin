@@ -32,7 +32,7 @@ namespace TP02
             WeaponsList.Add(new Weapon("Torpille", 3, 3, Weapon.EWeaponType.Guided, 2));
         }
 
-        //2.b.2
+        //2.c.2
         public override void TakeDamages(Weapon weapon)
         {
             Random random = new Random();
@@ -40,7 +40,7 @@ namespace TP02
 
             if (weapon.weaponType == EWeaponType.Direct)
             {
-                chance = random.Next(1, 11); // creates a number between 1 and 11
+                chance = random.Next(1, 11); // creates a number between 1 and 10
                 if (chance == 1)
                 {
                     if (weapon.Shoot() != 0)
@@ -84,17 +84,17 @@ namespace TP02
         public override void ShootTarget(Spaceship target)
         {
             Random random = new Random();
+            Console.WriteLine("Vous passez a l'attaque ! ");
 
             if (WeaponsList.Count() != 0)
             {
                 int randomWeapon = random.Next(0, WeaponsList.Count());
                 Weapon weapon = WeaponsList[randomWeapon];
 
-                Console.WriteLine("Vous passez a l'attaque ! ");
 
                 target.TakeDamages(WeaponsList[randomWeapon]);
             }
-            else { Console.WriteLine("Tu n'a pas d'arme mon ami"); }
+            else { Console.WriteLine("Tu n'a pas d'arme mon ami\n"); }
         }
     }
 }

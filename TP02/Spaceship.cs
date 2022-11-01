@@ -5,7 +5,7 @@ namespace Aydin_Isamettin_Tp1
     public abstract class Spaceship
     {
         
-        protected string Name { get; set; }
+        public string Name { get; set; }
         
         protected bool isDestroyed;
         
@@ -133,6 +133,7 @@ namespace Aydin_Isamettin_Tp1
         public void ViewShip()
         {
             Console.WriteLine("======== INFOS VAISSEAU ========");
+            Console.WriteLine("Nom du vaisseau : " + Name);
             Console.WriteLine("Point de bouclier : " + CurrentShield + "/" + MaxShield);
             Console.WriteLine("Point de structure : " + CurrentStructure + "/" + MaxStructure);
             if (IsDestroyed) { Console.WriteLine("Le vaisseau est détruit"); }

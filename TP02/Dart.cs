@@ -38,6 +38,7 @@ namespace TP02
         public override void ShootTarget(Spaceship target)
         {
             Random random = new Random();
+            Console.WriteLine("Vous passez a l'attaque ! ");
 
             if (WeaponsList.Count() != 0)
             {
@@ -49,10 +50,9 @@ namespace TP02
                 {
                     WeaponsList[randomWeapon].TimeBeforReload = 1;
                 }
-                Console.WriteLine("Vous passez a l'attaque ! ");
                 target.TakeDamages(WeaponsList[randomWeapon]);
             }
-            else { Console.WriteLine("Tu n'a pas d'arme mon ami"); }
+            else { Console.WriteLine("Tu n'a pas d'arme mon ami\n"); }
         }
     }
 }

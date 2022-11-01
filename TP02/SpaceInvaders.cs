@@ -34,10 +34,13 @@ namespace Aydin_Isamettin_Tp1
             myGame.Players[0].MySpaceship.ViewWeapons();
 
             //ATTAQUE DE JOHN DOE SUR LE VAISSEAU 1
-            Console.WriteLine("======== ATTAQUE DU VAISSEAU 1 PAR JOHN DOE ========\n");
+            Console.WriteLine("======== ATTAQUE DU Faucon Millenium PAR JOHN DOE ========\n");
+            myGame.Players[0].MySpaceship.ShootTarget(myGame.Players[3].MySpaceship);
             myGame.Players[0].MySpaceship.ShootTarget(myGame.Players[3].MySpaceship);
             myGame.Players[0].MySpaceship.ShootTarget(myGame.Players[3].MySpaceship);
 
+
+            //AFFICHAGE DU VAISSEAU ATTAQUE
             myGame.Players[3].MySpaceship.ViewShip();
 
         }
