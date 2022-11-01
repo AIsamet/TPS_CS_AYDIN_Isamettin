@@ -6,6 +6,26 @@ namespace TP02
     //3.2
     public class F_18 : Spaceship, IAbility
     {
+        public F_18()
+        {
+            Name = "Default Name";
+            MaxStructure = 15;
+            MaxShield = 0;
+            CurrentStructure = MaxStructure;
+            CurrentShield = MaxShield;
+            WeaponsList = new List<Weapon>();
+        }
+
+        public F_18(string name)
+        {
+            Name = name;
+            MaxStructure = 15;
+            MaxShield = 0;
+            CurrentStructure = MaxStructure;
+            CurrentShield = MaxShield;
+            WeaponsList = new List<Weapon>();
+        }
+
         public override void ShootTarget(Spaceship target)
         {
             Random random = new Random();

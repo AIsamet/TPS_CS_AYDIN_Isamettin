@@ -6,6 +6,26 @@ namespace TP02
     //3.2
     public class Tardis : Spaceship, IAbility
     {
+        public Tardis()
+        {
+            Name = "Default Name";
+            MaxStructure = 1;
+            MaxShield = 0;
+            CurrentStructure = MaxStructure;
+            CurrentShield = MaxShield;
+            WeaponsList = new List<Weapon>();
+        }
+
+        public Tardis(string name)
+        {
+            Name = name;
+            MaxStructure = 1;
+            MaxShield = 0;
+            CurrentStructure = MaxStructure;
+            CurrentShield = MaxShield;
+            WeaponsList = new List<Weapon>();
+        }
+
         public override void ShootTarget(Spaceship target)
         {
             Random random = new Random();
