@@ -44,17 +44,20 @@ namespace TP02
 
         public int Shoot()
         {
-            //3.a
+            //3.3
+            
+            
+            //1.3.a
             TimeBeforReload -= 1;
             if (TimeBeforReload < 0) { TimeBeforReload = 0; }
 
-            //3.c         
+            //1.3.c         
             if (TimeBeforReload == 0)
             {
                 Random random = new Random();
                 int degats = random.Next(MinDamage, MaxDamage);
 
-                //3.d.1    
+                //1.3.d.1    
                 if (weaponType == EWeaponType.Direct)
                 {
                     int chance = random.Next(1, 11); // creates a number between 1 and 11
@@ -73,7 +76,7 @@ namespace TP02
                     }
                 }
 
-                //3.d.2
+                //1.3.d.2
                 if (weaponType == EWeaponType.Explosive)
                 {
                     int chance = random.Next(1, 5); // creates a number between 1 and 4
@@ -93,7 +96,7 @@ namespace TP02
                     }
                 }
 
-                //3.d.3
+                //1.3.d.3
                 if (weaponType == EWeaponType.Guided)
                 {
                     degats = MinDamage;
@@ -103,7 +106,7 @@ namespace TP02
                 }
             }
 
-            //3.b
+            //1.3.b
             Console.WriteLine("L'arme " + name + " est entrain de recharger\nTours avant rechargement : " + TimeBeforReload + "\n");
             return 0;
 
