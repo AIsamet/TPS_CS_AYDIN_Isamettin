@@ -1,5 +1,7 @@
 ﻿using System;
-namespace Aydin_Isamettin_Tp1
+
+namespace TP01
+    
 {
     public class Armory
     {

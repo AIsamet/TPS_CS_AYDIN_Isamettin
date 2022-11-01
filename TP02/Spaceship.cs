@@ -1,5 +1,7 @@
 ﻿using System;
-namespace Aydin_Isamettin_Tp1
+
+namespace TP02
+    
 {
     //2.1
     public abstract class Spaceship

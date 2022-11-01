@@ -1,7 +1,7 @@
 ﻿using System;
-using TP02;
 
-namespace Aydin_Isamettin_Tp1
+namespace TP02
+    
 {
     public class Player
     {

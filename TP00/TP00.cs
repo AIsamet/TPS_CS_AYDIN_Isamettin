@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace TP
+namespace TP00
 {
     public class TP00
     {

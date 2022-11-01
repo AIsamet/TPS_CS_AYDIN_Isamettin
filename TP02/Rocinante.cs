@@ -1,12 +1,8 @@
-﻿using Aydin_Isamettin_Tp1;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Aydin_Isamettin_Tp1.Weapon;
+﻿using System;
+using static TP02.Weapon;
 
 namespace TP02
+
 {
     public class Rocinante : Spaceship
     {
