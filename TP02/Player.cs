@@ -17,6 +17,7 @@ namespace TP02
             LastName = Format(lastName);
             Alias = alias;
             MySpaceship = new ViperMKII();
+            MySpaceship.Owner = this;
         }
 
         public Player(string firstName, string lastName, string alias, Spaceship spaceship)
@@ -25,6 +26,7 @@ namespace TP02
             LastName = Format(lastName);
             Alias = alias;
             MySpaceship = spaceship;
+            spaceship.Owner = this;
         }
 
         private static string Format(string str)

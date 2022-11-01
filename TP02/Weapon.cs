@@ -44,8 +44,6 @@ namespace TP02
 
         public int Shoot()
         {
-            //3.3
-            
             
             //1.3.a
             TimeBeforReload -= 1;

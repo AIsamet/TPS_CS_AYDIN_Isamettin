@@ -9,6 +9,7 @@ namespace TP02
         //2.c.1
         public Rocinante()
         {
+            Name = "Default Name";
             MaxStructure = 3;
             MaxShield = 5;
             CurrentStructure = MaxStructure;

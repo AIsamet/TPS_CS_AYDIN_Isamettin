@@ -10,6 +10,7 @@ namespace TP02
         //2.b.1
         public B_Wings()
         {
+            Name = "Default Name";
             MaxStructure = 30;
             MaxShield = 0;
             CurrentStructure = MaxStructure;

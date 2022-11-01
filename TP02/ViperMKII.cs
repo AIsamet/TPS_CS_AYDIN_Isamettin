@@ -8,6 +8,7 @@ namespace TP02
         //2.d.1
         public ViperMKII()
         {
+            Name = "Default Name";
             MaxStructure = 10;
             MaxShield = 15;
             CurrentStructure = MaxStructure;

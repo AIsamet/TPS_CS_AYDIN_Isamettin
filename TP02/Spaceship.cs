@@ -8,6 +8,7 @@ namespace TP02
     {
         
         public string Name { get; set; }
+        public Player Owner { get; set; }
         
         protected bool isDestroyed;
         
@@ -51,6 +52,7 @@ namespace TP02
 
         public Spaceship()
         {
+            Name = "Default Name";
             MaxStructure = 100;
             MaxShield = 100;
             CurrentStructure = MaxStructure;

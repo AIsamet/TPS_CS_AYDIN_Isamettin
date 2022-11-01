@@ -10,6 +10,7 @@ namespace TP02
         //2.a.1
         public Dart()
         {
+            Name = "Default Name";
             MaxStructure = 10;
             MaxShield = 3;
             CurrentStructure = MaxStructure;
