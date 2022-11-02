@@ -3,33 +3,36 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
 namespace TP02
-    
+
 {
     public class SpaceInvaders
     {
-        private List<Player> Players { get; set; }
-        public Armory GameArmory { get; private set; }
-        public List<Spaceship> Spaceships { get; private set; }
-        public List<Spaceship> EnemySpaceships { get; private set; }
+        public List<Player> Players { get;  set; }
+        public Armory GameArmory { get;  set; }
+        public List<Spaceship> Spaceships { get;  set; }
+        public List<Spaceship> EnemySpaceships { get;  set; }
 
+        //implementation thread safe du patern singleton pour la classe SpaceInvaders
+        private static readonly Lazy<SpaceInvaders> lazy = new Lazy<SpaceInvaders>( () => new SpaceInvaders() );
+        public static SpaceInvaders GetInstance { get { return lazy.Value; } }
 
-
-        public SpaceInvaders()
+        private SpaceInvaders()
         {
             Init();
         }
 
-        static void Main()
+        
+        private static void Main()
         {
 
-            SpaceInvaders myGame = new SpaceInvaders();
+            SpaceInvaders myGame = GetInstance;
 
             //NOUVEAU JOUEUR + NOUVEAU VAISSEAU
-            myGame.Spaceships.Add(new Rocinante("Faucon Millenium"));
+            myGame.Spaceships.Add(new Dart("Faucon Millenium"));
             myGame.Players.Add(new Player("Isamettin", "Aydin", "iSayD", myGame.Spaceships[0]));
 
             //NOUVEL ENEMI + NOUVEAU VAISSEAU ENEMI
-            myGame.Spaceships.Add(new B_Wings("Executor"));
+            myGame.Spaceships.Add(new F_18("Executor"));
             myGame.EnemySpaceships.Add(myGame.Spaceships[1]);
             myGame.Players.Add(new Player("Dark", "Vador", "D4RK_V4D0R", myGame.Spaceships[1]));
 
@@ -46,7 +49,6 @@ namespace TP02
             //ATTAQUE DE JOHN DOE SUR LE VAISSEAU 1
             Console.WriteLine("======== ATTAQUE DU Faucon Millenium PAR Dark Vador ========\n");
             myGame.Players[1].MySpaceship.ShootTarget(myGame.Players[0].MySpaceship);
-            myGame.Players[1].MySpaceship.ShootTarget(myGame.Players[0].MySpaceship);
 
             //AFFICHAGE DU VAISSEAU ATTAQUE
             myGame.Players[0].MySpaceship.ViewShip();
@@ -61,7 +63,8 @@ namespace TP02
             /*Players.Add(new Player("john", "doe", "jojo"));
             Players.Add(new Player("jane", "doe", "jaja"));
             Players.Add(new Player("michel", "meyer", "mimi"));*/
-            foreach (Player player in Players) {
+            foreach (Player player in Players)
+            {
                 Spaceships.Add(player.MySpaceship);
             }
             GameArmory = new Armory();

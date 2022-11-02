@@ -16,7 +16,7 @@ namespace TP02
         protected int MaxStructure { get; set; }
         protected int MaxShield { get; set; }
         protected int CurrentShield { get; set; }
-        protected int CurrentStructure
+        public int CurrentStructure
         {
             get
             {
@@ -26,13 +26,13 @@ namespace TP02
             {
                 //SI LA CURRENTSTRUCTURE EST SET A ZERO ON MET A JOUR L'ATTRIBUT ISDESTROYED
                 currentStructure = value;
-                if (CurrentStructure == 0)
+                if (currentStructure == 0)
                 {
-                    IsDestroyed = true;
+                    isDestroyed = true;
                 }
             }
         }
-        protected bool IsDestroyed
+        public bool IsDestroyed
         {
             get
             {
@@ -44,7 +44,7 @@ namespace TP02
             }
             set
             {
-                isDestroyed = value;
+                currentStructure = 0;
             }
         }
 
@@ -143,13 +143,13 @@ namespace TP02
             if (IsDestroyed) { Console.WriteLine("Le vaisseau est détruit"); }
             ViewWeapons();
         }
-
+        
         //2.3
-        public virtual void TakeDamages(Weapon weapon)
+        public virtual void TakeDamages(int damage)
         {
             if (CurrentShield > 0)
             {
-                CurrentShield -= weapon.Shoot();
+                CurrentShield -= damage;
                 if (CurrentShield < 0)
                 {
                     CurrentStructure += CurrentShield;
@@ -162,13 +162,13 @@ namespace TP02
             }
             else
             {
-                CurrentStructure -= weapon.Shoot();
+                CurrentStructure -= damage;
                 if (CurrentStructure < 0)
                 {
                     CurrentStructure = 0;
                 }
             }
-        }
+        } 
 
         //2.4
         public abstract void ShootTarget(Spaceship target);

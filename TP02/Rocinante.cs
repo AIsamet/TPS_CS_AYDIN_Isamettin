@@ -1,9 +1,9 @@
 ﻿using System;
-using static TP02.Weapon;
 
 namespace TP02
 
 {
+    //2.c
     public class Rocinante : Spaceship
     {
         //2.c.1
@@ -30,12 +30,12 @@ namespace TP02
         }
 
         //2.c.2
-        public override void TakeDamages(Weapon weapon)
+        public override void TakeDamages(int damage)
         {
             Random random = new Random();
             int chance;
 
-            if (weapon.weaponType == EWeaponType.Direct)
+           /* if (weapon.weaponType == Weapon.EWeaponType.Direct)
             {
                 chance = random.Next(1, 11); // creates a number between 1 and 10
                 if (chance == 1)
@@ -49,7 +49,7 @@ namespace TP02
                 Console.WriteLine("------------------------------------------------------------\n");
             }
 
-            else if (weapon.weaponType == EWeaponType.Explosive)
+            else if (weapon.weaponType == Weapon.EWeaponType.Explosive)
             {
                 chance = random.Next(1, 5); // creates a number between 1 and 4
                 if (chance == 1)
@@ -63,7 +63,7 @@ namespace TP02
                 Console.WriteLine("------------------------------------------------------------\n");
             }
 
-            else if (weapon.weaponType == EWeaponType.Guided)
+            else if (weapon.weaponType == Weapon.EWeaponType.Guided)
             {
                 chance = random.Next(1, 5); // creates a number between 1 and 4
                 if (chance == 1 || chance == 2 || chance == 3)
@@ -75,7 +75,7 @@ namespace TP02
                 }
                 else { base.TakeDamages(weapon); }
                 Console.WriteLine("------------------------------------------------------------\n");
-            }
+            }*/
         }
 
         public override void ShootTarget(Spaceship target)
@@ -86,10 +86,7 @@ namespace TP02
             if (WeaponsList.Count() != 0)
             {
                 int randomWeapon = random.Next(0, WeaponsList.Count());
-                Weapon weapon = WeaponsList[randomWeapon];
-
-
-                target.TakeDamages(WeaponsList[randomWeapon]);
+                target.TakeDamages(WeaponsList[randomWeapon].Shoot());
             }
             else { Console.WriteLine("Tu n'a pas d'arme mon ami\n"); }
         }

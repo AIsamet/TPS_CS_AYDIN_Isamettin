@@ -3,6 +3,7 @@
 namespace TP02
     
 {
+    //2.d
     public class ViperMKII : Spaceship
     {
         //2.d.1
@@ -29,7 +30,7 @@ namespace TP02
             CurrentShield = MaxShield;
             WeaponsList = new List<Weapon>();
             //2.d.1.c
-            WeaponsList.Add(new Weapon("Torpille", 3, 3, Weapon.EWeaponType.Guided, 2));
+            WeaponsList.Add(new Weapon("Mitrailleuse", 2, 3, Weapon.EWeaponType.Direct, 1));
             WeaponsList.Add(new Weapon("EMG", 1, 7, Weapon.EWeaponType.Explosive, 1.5));
             WeaponsList.Add(new Weapon("Missile", 4, 100, Weapon.EWeaponType.Guided, 4));
         }
@@ -43,10 +44,7 @@ namespace TP02
             if (WeaponsList.Count() != 0)
             {
                 int randomWeapon = random.Next(0, WeaponsList.Count());
-                Weapon weapon = WeaponsList[randomWeapon];
-
-
-                target.TakeDamages(WeaponsList[randomWeapon]);
+                target.TakeDamages(WeaponsList[randomWeapon].Shoot());
             }
             else { Console.WriteLine("Tu n'a pas d'arme mon ami\n"); }
 

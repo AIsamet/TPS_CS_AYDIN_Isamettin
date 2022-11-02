@@ -30,15 +30,11 @@ namespace TP02
         {
             Random random = new Random();
             Console.WriteLine("Vous passez a l'attaque ! ");
-            Console.WriteLine(Name + "lance son attaque special");
 
             if (WeaponsList.Count() != 0)
             {
                 int randomWeapon = random.Next(0, WeaponsList.Count());
-                Weapon weapon = WeaponsList[randomWeapon];
-
-
-                target.TakeDamages(WeaponsList[randomWeapon]);
+                target.TakeDamages(WeaponsList[randomWeapon].Shoot());
             }
             else { Console.WriteLine("Tu n'a pas d'arme mon ami\n"); }
         }

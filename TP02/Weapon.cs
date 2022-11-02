@@ -58,7 +58,7 @@ namespace TP02
                 //1.3.d.1    
                 if (weaponType == EWeaponType.Direct)
                 {
-                    int chance = random.Next(1, 11); // creates a number between 1 and 11
+                    int chance = random.Next(1, 11); // creates a number between 1 and 10
                     if (chance == 1)
                     {
                         degats = 0;

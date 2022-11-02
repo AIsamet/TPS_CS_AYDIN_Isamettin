@@ -1,5 +1,4 @@
 ﻿using System;
-using static TP02.Weapon;
 
 namespace TP02
     
@@ -40,13 +39,11 @@ namespace TP02
             {
                 int randomWeapon = random.Next(0, WeaponsList.Count());
 
-                Weapon weapon = WeaponsList[randomWeapon];
-
-                if (WeaponsList[randomWeapon].weaponType == EWeaponType.Explosive)
+                if (WeaponsList[randomWeapon].weaponType == Weapon.EWeaponType.Explosive)
                 {
                     WeaponsList[randomWeapon].TimeBeforReload = 1;
                 }
-                target.TakeDamages(WeaponsList[randomWeapon]);
+                target.TakeDamages(WeaponsList[randomWeapon].Shoot());
             }
             else { Console.WriteLine("Tu n'a pas d'arme mon ami\n"); }
         }
