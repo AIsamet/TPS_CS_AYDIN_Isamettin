@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace TP02
-    
+
 {
     public class ArmoryException : Exception
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace TP02
-    
+
 {
     public class Armory
     {
@@ -15,9 +15,9 @@ namespace TP02
         private void Init()
         {
             Weapons = new List<Weapon>();
-            Weapons.Add(new Weapon("Rayon laser", 50, 80, Weapon.EWeaponType.Direct,1));
-            Weapons.Add(new Weapon("Mitrailleuse", 20, 40, Weapon.EWeaponType.Guided,1));
-            Weapons.Add(new Weapon("Lance missile", 10, 60, Weapon.EWeaponType.Explosive,1));
+            Weapons.Add(new Weapon("Rayon laser", 50, 80, Weapon.EWeaponType.Direct, 1));
+            Weapons.Add(new Weapon("Mitrailleuse", 20, 40, Weapon.EWeaponType.Guided, 1));
+            Weapons.Add(new Weapon("Lance missile", 10, 60, Weapon.EWeaponType.Explosive, 1));
         }
 
         public void ViewArmory()

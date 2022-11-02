@@ -1,24 +1,29 @@
 ﻿using System;
 
 namespace TP02
-    
+
 {
     //2.1
     public abstract class Spaceship : ISpaceship
     {
-        
+
         public string Name { get; set; }
         public double Structure { get; set; }
         public double Shield { get; set; }
-        public bool IsDestroyed { get
+        public bool IsDestroyed
+        {
+            get
             {
                 if (CurrentShield == 0 && CurrentStructure == 0)
                 { return true; }
                 else return false;
-            } }
+            }
+        }
         public int MaxWeapons { get; }
         public List<Weapon> Weapons { get; }
-        public double AverageDamages { get
+        public double AverageDamages
+        {
+            get
             {
                 double moyenne = 0;
                 foreach (Weapon weapon in Weapons)
@@ -27,10 +32,21 @@ namespace TP02
                 }
                 if ((moyenne / Weapons.Count()) > 0) { return moyenne; }
                 return 0;
-            } }
+            }
+        }
         public double CurrentStructure { get; set; }
         public double CurrentShield { get; set; }
-        public bool BelongsPlayer { get; }
+        public bool BelongsPlayer
+        {
+            get
+            {
+                if (Owner != null)
+                {
+                    return true;
+                }
+                else return false;
+            }
+        }
         public Player Owner { get; set; }
 
         public Spaceship()
@@ -123,11 +139,17 @@ namespace TP02
 
         public void ReloadWeapons()
         {
-            
+            foreach (Weapon weapon in Weapons)
+            {
+                if (weapon.TimeBeforReload > 1)
+                {
+                    weapon.TimeBeforReload -= 1;
+                }
+            }
         }
 
         //2.3
-        public virtual void TakeDamages(double damages)
+        public void TakeDamages(double damages)
         {
             if (CurrentShield > 0)
             {
@@ -150,7 +172,56 @@ namespace TP02
                     CurrentStructure = 0;
                 }
             }
-        } 
+        }
+
+        //2.c.2
+        public void TakeDamagesRocinante(Weapon weapon)
+        {
+            Random random = new Random();
+            int chance;
+
+            if (weapon.Type == Weapon.EWeaponType.Direct)
+            {
+                chance = random.Next(1, 11); // creates a number between 1 and 10
+                if (chance == 1)
+                {
+                    if (weapon.Shoot() != 0)
+                    {
+                        Console.WriteLine("Attaque esquivé par Rocinante");
+                    }
+                }
+                else { TakeDamages(weapon.Shoot()); }
+                Console.WriteLine("------------------------------------------------------------\n");
+            }
+
+            else if (weapon.Type == Weapon.EWeaponType.Explosive)
+            {
+                chance = random.Next(1, 5); // creates a number between 1 and 4
+                if (chance == 1)
+                {
+                    if (weapon.Shoot() != 0)
+                    {
+                        Console.WriteLine("Attaque esquivé par Rocinante");
+                    }
+                }
+                else { TakeDamages(weapon.Shoot()); }
+                Console.WriteLine("------------------------------------------------------------\n");
+            }
+
+            else if (weapon.Type == Weapon.EWeaponType.Guided)
+            {
+                chance = random.Next(1, 5); // creates a number between 1 and 4
+                if (chance == 1 || chance == 2 || chance == 3)
+                {
+                    if (weapon.Shoot() != 0)
+                    {
+                        Console.WriteLine("Attaque esquivé par Rocinante");
+                    }
+                }
+                else { TakeDamages(weapon.Shoot()); }
+                Console.WriteLine("------------------------------------------------------------\n");
+            }
+        }
 
         //2.4
         public abstract void ShootTarget(Spaceship target);

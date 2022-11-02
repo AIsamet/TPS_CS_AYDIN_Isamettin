@@ -34,9 +34,19 @@ namespace TP02
             if (Weapons.Count() != 0)
             {
                 int randomWeapon = random.Next(0, Weapons.Count());
-                target.TakeDamages(Weapons[randomWeapon].Shoot());
+
+                if (target is Rocinante)
+                {
+                    target.TakeDamagesRocinante(Weapons[randomWeapon]);
+                }
+                else
+                {
+                    target.TakeDamages(Weapons[randomWeapon].Shoot());
+                }
             }
-            else { Console.WriteLine("Tu n'a pas d'arme mon ami\n");
+            else
+            {
+                Console.WriteLine("Tu n'a pas d'arme mon ami\n");
                 SpaceInvaders Game = SpaceInvaders.GetInstance;
                 UseAbility(Game.EnemySpaceships);
 

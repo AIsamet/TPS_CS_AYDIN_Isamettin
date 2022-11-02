@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace TP02
-    
+
 {
     //2.a
     public class Dart : Spaceship
@@ -43,7 +43,15 @@ namespace TP02
                 {
                     Weapons[randomWeapon].TimeBeforReload = 1;
                 }
-                target.TakeDamages(Weapons[randomWeapon].Shoot());
+
+                if (target is Rocinante)
+                {
+                    target.TakeDamagesRocinante(Weapons[randomWeapon]);
+                }
+                else
+                {
+                    target.TakeDamages(Weapons[randomWeapon].Shoot());
+                }
             }
             else { Console.WriteLine("Tu n'a pas d'arme mon ami\n"); }
         }

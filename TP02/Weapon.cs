@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace TP02
-    
+
 {
     public class Weapon : IWeapon
     {
@@ -9,7 +9,13 @@ namespace TP02
         public EWeaponType Type { get; set; }
         public double MinDamage { get; set; }
         public double MaxDamage { get; set; }
-        public double AverageDamage { get; }
+        public double AverageDamage
+        {
+            get
+            {
+                return ((MinDamage + MaxDamage) / 2);
+            }
+        }
 
         //1.1 temps de rechargement qui se calculera en nombre de tour
         public double ReloadTime { get; set; }
@@ -45,7 +51,7 @@ namespace TP02
 
         public double Shoot()
         {
-            
+
             //1.3.a
             TimeBeforReload -= 1;
             if (TimeBeforReload < 0) { TimeBeforReload = 0; }

@@ -7,13 +7,13 @@ namespace TP02
 {
     public class SpaceInvaders
     {
-        public List<Player> Players { get;  set; }
-        public Armory GameArmory { get;  set; }
-        public List<Spaceship> Spaceships { get;  set; }
-        public List<Spaceship> EnemySpaceships { get;  set; }
+        public List<Player> Players { get; set; }
+        public Armory GameArmory { get; set; }
+        public List<Spaceship> Spaceships { get; set; }
+        public List<Spaceship> EnemySpaceships { get; set; }
 
         //implementation thread safe du patern singleton pour la classe SpaceInvaders
-        private static readonly Lazy<SpaceInvaders> lazy = new Lazy<SpaceInvaders>( () => new SpaceInvaders() );
+        private static readonly Lazy<SpaceInvaders> lazy = new Lazy<SpaceInvaders>(() => new SpaceInvaders());
         public static SpaceInvaders GetInstance { get { return lazy.Value; } }
 
         private SpaceInvaders()
@@ -21,22 +21,22 @@ namespace TP02
             Init();
         }
 
-        
+
         private static void Main()
         {
 
             SpaceInvaders myGame = GetInstance;
 
             //NOUVEAU JOUEUR + NOUVEAU VAISSEAU
-            myGame.Spaceships.Add(new Dart("Faucon Millenium"));
+            myGame.Spaceships.Add(new Rocinante("Faucon Millenium"));
             myGame.Players.Add(new Player("Isamettin", "Aydin", "iSayD", myGame.Spaceships[0]));
 
             //NOUVEL ENEMI + NOUVEAU VAISSEAU ENEMI
             myGame.Spaceships.Add(new F_18("Executor"));
             myGame.EnemySpaceships.Add(myGame.Spaceships[1]);
             myGame.Players.Add(new Player("Dark", "Vador", "D4RK_V4D0R", myGame.Spaceships[1]));
-            
-            myGame.Spaceships.Add(new Tardis("TEST"));
+
+            myGame.Spaceships.Add(new Rocinante("TEST"));
             myGame.EnemySpaceships.Add(myGame.Spaceships[2]);
             myGame.Players.Add(new Player("TEST", "TEST", "TEST", myGame.Spaceships[2]));
 
@@ -52,6 +52,8 @@ namespace TP02
 
             //ATTAQUE DE JOHN DOE SUR LE VAISSEAU 1
             Console.WriteLine("======== ATTAQUE DU Faucon Millenium PAR Dark Vador ========\n");
+            myGame.Players[2].BattleShip.ShootTarget(myGame.Players[0].BattleShip);
+            myGame.Players[2].BattleShip.ShootTarget(myGame.Players[0].BattleShip);
             myGame.Players[2].BattleShip.ShootTarget(myGame.Players[0].BattleShip);
 
             //VAISSEAUX SUITE APTITUDE DU TARDIS
