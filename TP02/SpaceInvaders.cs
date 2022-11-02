@@ -35,6 +35,10 @@ namespace TP02
             myGame.Spaceships.Add(new F_18("Executor"));
             myGame.EnemySpaceships.Add(myGame.Spaceships[1]);
             myGame.Players.Add(new Player("Dark", "Vador", "D4RK_V4D0R", myGame.Spaceships[1]));
+            
+            myGame.Spaceships.Add(new Tardis("TEST"));
+            myGame.EnemySpaceships.Add(myGame.Spaceships[2]);
+            myGame.Players.Add(new Player("TEST", "TEST", "TEST", myGame.Spaceships[2]));
 
             //AFFICHAGE DES JOUEURS ET VAISSEAUX DE LA PARTIE
             Console.WriteLine("======== JOUEURS ET VAISSEAUX DE LA PARTIE ========");
@@ -44,11 +48,15 @@ namespace TP02
 
             //ARMES DU VAISSEAU DU JOUEUR Dark Vador
             Console.WriteLine("======== ARMES DU VAISSEAU DU JOUEUR Dark Vador ========");
-            myGame.Players[1].MySpaceship.ViewWeapons();
+            myGame.Players[2].MySpaceship.ViewWeapons();
 
             //ATTAQUE DE JOHN DOE SUR LE VAISSEAU 1
             Console.WriteLine("======== ATTAQUE DU Faucon Millenium PAR Dark Vador ========\n");
-            myGame.Players[1].MySpaceship.ShootTarget(myGame.Players[0].MySpaceship);
+            myGame.Players[2].MySpaceship.ShootTarget(myGame.Players[0].MySpaceship);
+
+            //VAISSEAUX SUITE APTITUDE DU TARDIS
+            Console.WriteLine("======== VAISSEAUX SUITE APTITUDE DU TARDIS ========\n");
+            myGame.ViewEnemySpaceships();
 
             //AFFICHAGE DU VAISSEAU ATTAQUE
             myGame.Players[0].MySpaceship.ViewShip();

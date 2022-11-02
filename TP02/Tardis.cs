@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace TP02
-    
+
 {
     //3.2
     public class Tardis : Spaceship, IAbility
@@ -36,12 +36,35 @@ namespace TP02
                 int randomWeapon = random.Next(0, WeaponsList.Count());
                 target.TakeDamages(WeaponsList[randomWeapon].Shoot());
             }
-            else { Console.WriteLine("Tu n'a pas d'arme mon ami\n"); }
+            else { Console.WriteLine("Tu n'a pas d'arme mon ami\n");
+                SpaceInvaders Game = SpaceInvaders.GetInstance;
+                UseAbility(Game.EnemySpaceships);
+
+            }
         }
 
         public void UseAbility(List<Spaceship> spaceships)
         {
-            throw new NotImplementedException();
+            SpaceInvaders Game = SpaceInvaders.GetInstance;
+            Console.WriteLine(this.Name + " utilise son aptitude speciale");
+            Console.WriteLine("Tardis se teleporte !");
+
+            Random random = new Random();
+            int randomVaisseau = random.Next(0, Game.EnemySpaceships.Count());
+            int randomPosition = random.Next(0, Game.EnemySpaceships.Count());
+
+            if (Game.EnemySpaceships.Count() != 1)
+            {
+                while (randomVaisseau == randomPosition)
+                {
+                    randomPosition = random.Next(0, Game.EnemySpaceships.Count());
+                }
+            }
+
+            Spaceship temp = Game.EnemySpaceships[randomPosition];
+            Game.EnemySpaceships[randomPosition] = Game.EnemySpaceships[randomVaisseau];
+            Game.EnemySpaceships[randomVaisseau] = temp;
+
         }
     }
 }
