@@ -48,18 +48,18 @@ namespace TP02
 
             //ARMES DU VAISSEAU DU JOUEUR Dark Vador
             Console.WriteLine("======== ARMES DU VAISSEAU DU JOUEUR Dark Vador ========");
-            myGame.Players[2].MySpaceship.ViewWeapons();
+            myGame.Players[2].BattleShip.ViewWeapons();
 
             //ATTAQUE DE JOHN DOE SUR LE VAISSEAU 1
             Console.WriteLine("======== ATTAQUE DU Faucon Millenium PAR Dark Vador ========\n");
-            myGame.Players[2].MySpaceship.ShootTarget(myGame.Players[0].MySpaceship);
+            myGame.Players[2].BattleShip.ShootTarget(myGame.Players[0].BattleShip);
 
             //VAISSEAUX SUITE APTITUDE DU TARDIS
             Console.WriteLine("======== VAISSEAUX SUITE APTITUDE DU TARDIS ========\n");
             myGame.ViewEnemySpaceships();
 
             //AFFICHAGE DU VAISSEAU ATTAQUE
-            myGame.Players[0].MySpaceship.ViewShip();
+            myGame.Players[0].BattleShip.ViewShip();
 
         }
 
@@ -73,7 +73,7 @@ namespace TP02
             Players.Add(new Player("michel", "meyer", "mimi"));*/
             foreach (Player player in Players)
             {
-                Spaceships.Add(player.MySpaceship);
+                Spaceships.Add(player.BattleShip);
             }
             GameArmory = new Armory();
         }

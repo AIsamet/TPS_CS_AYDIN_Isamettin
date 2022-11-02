@@ -9,21 +9,21 @@ namespace TP02
         public Tardis()
         {
             Name = "Default Name";
-            MaxStructure = 1;
-            MaxShield = 0;
-            CurrentStructure = MaxStructure;
-            CurrentShield = MaxShield;
-            WeaponsList = new List<Weapon>();
+            Structure = 1;
+            Shield = 0;
+            CurrentStructure = Structure;
+            CurrentShield = Shield;
+            //Weapons = new List<Weapon>();
         }
 
         public Tardis(string name)
         {
             Name = name;
-            MaxStructure = 1;
-            MaxShield = 0;
-            CurrentStructure = MaxStructure;
-            CurrentShield = MaxShield;
-            WeaponsList = new List<Weapon>();
+            Structure = 1;
+            Shield = 0;
+            CurrentStructure = Structure;
+            CurrentShield = Shield;
+            //Weapons = new List<Weapon>();
         }
 
         public override void ShootTarget(Spaceship target)
@@ -31,10 +31,10 @@ namespace TP02
             Random random = new Random();
             Console.WriteLine("Vous passez a l'attaque ! ");
 
-            if (WeaponsList.Count() != 0)
+            if (Weapons.Count() != 0)
             {
-                int randomWeapon = random.Next(0, WeaponsList.Count());
-                target.TakeDamages(WeaponsList[randomWeapon].Shoot());
+                int randomWeapon = random.Next(0, Weapons.Count());
+                target.TakeDamages(Weapons[randomWeapon].Shoot());
             }
             else { Console.WriteLine("Tu n'a pas d'arme mon ami\n");
                 SpaceInvaders Game = SpaceInvaders.GetInstance;

@@ -33,14 +33,14 @@ namespace TP02
         public void AddWeapon(Weapon weapon)
         {
             Weapons.Add(weapon);
-            Console.WriteLine("L'arme " + weapon.name + " a été ajouté a l'armurerie\n");
+            Console.WriteLine("L'arme " + weapon.Name + " a été ajouté a l'armurerie\n");
         }
 
         public void RemoveWeapon(Weapon armeSupprimer)
         {
             foreach (Weapon weapon in Weapons)
             {
-                if (weapon.name == armeSupprimer.name)
+                if (weapon.Name == armeSupprimer.Name)
                 {
                     Weapons.Remove(armeSupprimer);
                     break;
@@ -59,7 +59,7 @@ namespace TP02
         {
             foreach (Weapon weapon in Weapons)
             {
-                if (weapon.name == name)
+                if (weapon.Name == name)
                 {
                     return weapon;
                 }

@@ -3,21 +3,21 @@
 namespace TP02
     
 {
-    public class Player
+    public class Player : IPlayer
     {
         private string FirstName { get; set; }
         private string LastName { get; set; }
-        private string Alias { get; set; }
+        public string Alias { get; }
         public string Name { get { return (FirstName + " " + LastName); } }
-        public Spaceship MySpaceship { get; private set; }
+        public Spaceship BattleShip { get; set; }
 
         public Player(string firstName, string lastName, string alias)
         {
             FirstName = Format(firstName);
             LastName = Format(lastName);
             Alias = alias;
-            MySpaceship = new ViperMKII();
-            MySpaceship.Owner = this;
+            BattleShip = new ViperMKII();
+            BattleShip.Owner = this;
         }
 
         public Player(string firstName, string lastName, string alias, Spaceship spaceship)
@@ -25,7 +25,7 @@ namespace TP02
             FirstName = Format(firstName);
             LastName = Format(lastName);
             Alias = alias;
-            MySpaceship = spaceship;
+            BattleShip = spaceship;
             spaceship.Owner = this;
         }
 

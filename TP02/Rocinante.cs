@@ -10,27 +10,27 @@ namespace TP02
         public Rocinante()
         {
             Name = "Default Name";
-            MaxStructure = 3;
-            MaxShield = 5;
-            CurrentStructure = MaxStructure;
-            CurrentShield = MaxShield;
-            WeaponsList = new List<Weapon>();
-            WeaponsList.Add(new Weapon("Torpille", 3, 3, Weapon.EWeaponType.Guided, 2));
+            Structure = 3;
+            Shield = 5;
+            CurrentStructure = Structure;
+            CurrentShield = Shield;
+            //Weapons = new List<Weapon>();
+            Weapons.Add(new Weapon("Torpille", 3, 3, Weapon.EWeaponType.Guided, 2));
         }
 
         public Rocinante(string name)
         {
             Name = name;
-            MaxStructure = 3;
-            MaxShield = 5;
-            CurrentStructure = MaxStructure;
-            CurrentShield = MaxShield;
-            WeaponsList = new List<Weapon>();
-            WeaponsList.Add(new Weapon("Torpille", 3, 3, Weapon.EWeaponType.Guided, 2));
+            Structure = 3;
+            Shield = 5;
+            CurrentStructure = Structure;
+            CurrentShield = Shield;
+            //Weapons = new List<Weapon>();
+            Weapons.Add(new Weapon("Torpille", 3, 3, Weapon.EWeaponType.Guided, 2));
         }
 
         //2.c.2
-        public override void TakeDamages(int damage)
+        public override void TakeDamages(double damage)
         {
             Random random = new Random();
             int chance;
@@ -83,10 +83,10 @@ namespace TP02
             Random random = new Random();
             Console.WriteLine("Vous passez a l'attaque ! ");
 
-            if (WeaponsList.Count() != 0)
+            if (Weapons.Count() != 0)
             {
-                int randomWeapon = random.Next(0, WeaponsList.Count());
-                target.TakeDamages(WeaponsList[randomWeapon].Shoot());
+                int randomWeapon = random.Next(0, Weapons.Count());
+                target.TakeDamages(Weapons[randomWeapon].Shoot());
             }
             else { Console.WriteLine("Tu n'a pas d'arme mon ami\n"); }
         }

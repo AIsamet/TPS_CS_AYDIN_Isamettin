@@ -4,83 +4,66 @@ namespace TP02
     
 {
     //2.1
-    public abstract class Spaceship
+    public abstract class Spaceship : ISpaceship
     {
         
         public string Name { get; set; }
-        public Player Owner { get; set; }
-        
-        protected bool isDestroyed;
-        
-        protected int currentStructure;
-        protected int MaxStructure { get; set; }
-        protected int MaxShield { get; set; }
-        protected int CurrentShield { get; set; }
-        public int CurrentStructure
-        {
-            get
+        public double Structure { get; set; }
+        public double Shield { get; set; }
+        public bool IsDestroyed { get
             {
-                return currentStructure;
-            }
-            set
-            {
-                //SI LA CURRENTSTRUCTURE EST SET A ZERO ON MET A JOUR L'ATTRIBUT ISDESTROYED
-                currentStructure = value;
-                if (currentStructure == 0)
-                {
-                    isDestroyed = true;
-                }
-            }
-        }
-        public bool IsDestroyed
-        {
-            get
-            {
-                if (CurrentStructure == 0)
-                {
-                    return true;
-                }
+                if (CurrentShield == 0 && CurrentStructure == 0)
+                { return true; }
                 else return false;
-            }
-            set
+            } }
+        public int MaxWeapons { get; }
+        public List<Weapon> Weapons { get; }
+        public double AverageDamages { get
             {
-                currentStructure = 0;
-            }
-        }
-
-        public List<Weapon> WeaponsList { get; protected set; }
+                double moyenne = 0;
+                foreach (Weapon weapon in Weapons)
+                {
+                    moyenne += ((weapon.MaxDamage + weapon.MinDamage) / 2);
+                }
+                if ((moyenne / Weapons.Count()) > 0) { return moyenne; }
+                return 0;
+            } }
+        public double CurrentStructure { get; set; }
+        public double CurrentShield { get; set; }
+        public bool BelongsPlayer { get; }
+        public Player Owner { get; set; }
 
         public Spaceship()
         {
             Name = "Default Name";
-            MaxStructure = 100;
-            MaxShield = 100;
-            CurrentStructure = MaxStructure;
-            CurrentShield = MaxShield;
-            WeaponsList = new List<Weapon>();
+            Structure = 100;
+            Shield = 100;
+            CurrentStructure = Structure;
+            CurrentShield = Shield;
+            Weapons = new List<Weapon>();
         }
 
         public Spaceship(string name)
         {
             Name = name;
-            MaxStructure = 100;
-            MaxShield = 100;
-            CurrentStructure = MaxStructure;
-            CurrentShield = MaxShield;
-            WeaponsList = new List<Weapon>();
+            Structure = 100;
+            Shield = 100;
+            CurrentStructure = Structure;
+            CurrentShield = Shield;
+            Weapons = new List<Weapon>();
         }
 
         //ON AJOUTE UNE ARME SEULEMENT SI ELLE EXISTE DANS L'ARMURERIE,
         //SI ON A ACTUELLEMENT MOINS DE 3 ARMES ET QU'ON A PAS DEJA L'ARME SOUAHITEE
         public void AddWeapon(Weapon weapon)
         {
-            if (WeaponsList.Count() < 3 && !CheckWeapon(weapon))
+            if (Weapons.Count() < 3 && !CheckWeapon(weapon))
             {
-                WeaponsList.Add(weapon);
-                Console.WriteLine(weapon.name + " ajouté au vaisseau \n");
+                Weapons.Add(weapon);
+                Console.WriteLine(weapon.Name + " ajouté au vaisseau \n");
             }
-            else if (WeaponsList.Count() >= 3) { Console.WriteLine("Vous avez atteint le nombre d'armes maximum\n"); }
-            else { Console.WriteLine("Vous ne pouvez pas ajouter la meme arme une seconde fois (" + weapon.name + ")\n"); }
+            else if (Weapons.Count() >= 3) { Console.WriteLine("Vous avez atteint le nombre d'armes maximum\n"); }
+            else { Console.WriteLine("Vous ne pouvez pas ajouter la meme arme une seconde fois (" + weapon.Name + ")\n"); }
         }
 
 
@@ -89,47 +72,36 @@ namespace TP02
         {
             if (CheckWeapon(oWeapon))
             {
-                WeaponsList.Remove(oWeapon);
-                Console.WriteLine("Arme " + oWeapon.name + " supprimé\n");
+                Weapons.Remove(oWeapon);
+                Console.WriteLine("Arme " + oWeapon.Name + " supprimé\n");
             }
-            else { Console.WriteLine("Vous ne possedez pas l'arme " + oWeapon.name + "\n"); }
+            else { Console.WriteLine("Vous ne possedez pas l'arme " + oWeapon.Name + "\n"); }
         }
 
         public void ClearWeapons()
         {
-            WeaponsList.Clear();
+            Weapons.Clear();
             Console.WriteLine("La liste des armes du vaisseau a été vidée\n");
         }
 
         public void ViewWeapons()
         {
             Console.WriteLine("Liste d'armes du vaisseau : ");
-            foreach (Weapon weapon in WeaponsList)
+            foreach (Weapon weapon in Weapons)
             {
                 Console.WriteLine(weapon.ToString());
             }
 
-            if (WeaponsList.Count == 0) { Console.WriteLine("Vide\n"); }
+            if (Weapons.Count == 0) { Console.WriteLine("Vide\n"); }
             else { Console.WriteLine(""); };
-        }
-
-        public double AverageDamages()
-        {
-            double moyenne = 0;
-            foreach (Weapon weapon in WeaponsList)
-            {
-                moyenne += ((weapon.MaxDamage + weapon.MinDamage) / 2);
-            }
-            if ((moyenne / WeaponsList.Count()) > 0) { return moyenne; }
-            return 0;
         }
 
         //VERIFIE SI UNE ARME EST DEJA AJOUTE AU SPACESHIP
         public bool CheckWeapon(Weapon weapon)
         {
-            foreach (Weapon w in WeaponsList)
+            foreach (Weapon w in Weapons)
             {
-                if (w.name == weapon.name) { return true; }
+                if (w.Name == weapon.Name) { return true; }
             }
             return false;
         }
@@ -138,18 +110,28 @@ namespace TP02
         {
             Console.WriteLine("======== INFOS VAISSEAU ========");
             Console.WriteLine("Nom du vaisseau : " + Name);
-            Console.WriteLine("Point de bouclier : " + CurrentShield + "/" + MaxShield);
-            Console.WriteLine("Point de structure : " + CurrentStructure + "/" + MaxStructure);
+            Console.WriteLine("Point de bouclier : " + CurrentShield + "/" + Shield);
+            Console.WriteLine("Point de structure : " + CurrentStructure + "/" + Structure);
             if (IsDestroyed) { Console.WriteLine("Le vaisseau est détruit"); }
             ViewWeapons();
         }
-        
+
+        public void RepairShield(double repair)
+        {
+            CurrentShield += repair;
+        }
+
+        public void ReloadWeapons()
+        {
+            
+        }
+
         //2.3
-        public virtual void TakeDamages(int damage)
+        public virtual void TakeDamages(double damages)
         {
             if (CurrentShield > 0)
             {
-                CurrentShield -= damage;
+                CurrentShield -= damages;
                 if (CurrentShield < 0)
                 {
                     CurrentStructure += CurrentShield;
@@ -162,7 +144,7 @@ namespace TP02
             }
             else
             {
-                CurrentStructure -= damage;
+                CurrentStructure -= damages;
                 if (CurrentStructure < 0)
                 {
                     CurrentStructure = 0;

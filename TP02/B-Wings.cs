@@ -10,23 +10,23 @@ namespace TP02
         public B_Wings()
         {
             Name = "Default Name";
-            MaxStructure = 30;
-            MaxShield = 0;
-            CurrentStructure = MaxStructure;
-            CurrentShield = MaxShield;
-            WeaponsList = new List<Weapon>();
-            WeaponsList.Add(new Weapon("Hammer", 1, 8, Weapon.EWeaponType.Explosive, 1.5));
+            Structure = 30;
+            Shield = 0;
+            CurrentStructure = Structure;
+            CurrentShield = Shield;
+            //Weapons = new List<Weapon>();
+            Weapons.Add(new Weapon("Hammer", 1, 8, Weapon.EWeaponType.Explosive, 1.5));
         }
 
         public B_Wings(string name)
         {
             Name = name;
-            MaxStructure = 30;
-            MaxShield = 0;
-            CurrentStructure = MaxStructure;
-            CurrentShield = MaxShield;
-            WeaponsList = new List<Weapon>();
-            WeaponsList.Add(new Weapon("Hammer", 1, 8, Weapon.EWeaponType.Explosive, 1.5));
+            Structure = 30;
+            Shield = 0;
+            CurrentStructure = Structure;
+            CurrentShield = Shield;
+            //Weapons = new List<Weapon>();
+            Weapons.Add(new Weapon("Hammer", 1, 8, Weapon.EWeaponType.Explosive, 1.5));
         }
 
         //2.b.2
@@ -35,15 +35,15 @@ namespace TP02
             Random random = new Random();
             Console.WriteLine("Vous passez a l'attaque ! ");
 
-            if (WeaponsList.Count() != 0)
+            if (Weapons.Count() != 0)
             {
-                int randomWeapon = random.Next(0, WeaponsList.Count());
+                int randomWeapon = random.Next(0, Weapons.Count());
 
-                if (WeaponsList[randomWeapon].weaponType == Weapon.EWeaponType.Explosive)
+                if (Weapons[randomWeapon].Type == Weapon.EWeaponType.Explosive)
                 {
-                    WeaponsList[randomWeapon].TimeBeforReload = 1;
+                    Weapons[randomWeapon].TimeBeforReload = 1;
                 }
-                target.TakeDamages(WeaponsList[randomWeapon].Shoot());
+                target.TakeDamages(Weapons[randomWeapon].Shoot());
             }
             else { Console.WriteLine("Tu n'a pas d'arme mon ami\n"); }
         }
