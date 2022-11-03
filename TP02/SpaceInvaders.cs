@@ -28,18 +28,6 @@ namespace TP02
 
             SpaceInvaders myGame = GetInstance;
 
-            //NOUVEAU JOUEUR + NOUVEAU VAISSEAU
-            myGame.Spaceships.Add(new Rocinante("Faucon Millenium"));
-            myGame.Players.Add(new Player("Isamettin", "Aydin", "iSayD", myGame.Spaceships[0]));
-
-            //NOUVEL ENEMI + NOUVEAU VAISSEAU ENEMI
-            myGame.Spaceships.Add(new F_18("Executor"));
-            myGame.EnemySpaceships.Add(myGame.Spaceships[1]);
-            myGame.Players.Add(new Player("Dark", "Vador", "D4RK_V4D0R", myGame.Spaceships[1]));
-
-            myGame.Spaceships.Add(new B_Wings("TEST"));
-            myGame.EnemySpaceships.Add(myGame.Spaceships[2]);
-            myGame.Players.Add(new Player("TEST", "TEST", "TEST", myGame.Spaceships[2]));
 
             //AFFICHAGE DES JOUEURS ET VAISSEAUX DE LA PARTIE
             Console.WriteLine("======== JOUEURS ET VAISSEAUX DE LA PARTIE ========");
@@ -47,25 +35,12 @@ namespace TP02
             myGame.ViewSpaceships();
             myGame.ViewEnemySpaceships();
 
-            //ARMES DU VAISSEAU DU JOUEUR Dark Vador
-            Console.WriteLine("======== ARMES DU VAISSEAU DU JOUEUR Dark Vador ========");
-            myGame.Players[2].BattleShip.ViewWeapons();
-
-            //ATTAQUE DE JOHN DOE SUR LE VAISSEAU 1
-            Console.WriteLine("======== ATTAQUE DU Faucon Millenium PAR Dark Vador ========\n");
-            myGame.Players[2].BattleShip.ShootTarget(myGame.Players[0].BattleShip);
-            myGame.Players[2].BattleShip.ShootTarget(myGame.Players[0].BattleShip);
-            myGame.Players[2].BattleShip.ShootTarget(myGame.Players[0].BattleShip);
-
             //VAISSEAUX SUITE APTITUDE DU TARDIS
-            Console.WriteLine("======== LISTE VAISSEAUX SUITE APTITUDE DU TARDIS ========\n");
-            myGame.ViewEnemySpaceships();
-
-            //AFFICHAGE DU VAISSEAU ATTAQUE
-            myGame.Players[0].BattleShip.ViewShip();
+            Console.WriteLine("======== JEU ========\n");
+            myGame.PlayRound();
 
         }
-
+        
         //4.2
         private void Init()
         {
@@ -74,8 +49,8 @@ namespace TP02
             Spaceships = new List<Spaceship>();
             EnemySpaceships = new List<Spaceship>();
 
-            //Spaceships.Add(new Rocinante("Faucon Millenium"));
-            //Players.Add(new Player("Isamettin", "Aydin", "iSayD", Spaceships[0]));
+            Spaceships.Add(new Rocinante("Faucon Millenium"));
+            Players.Add(new Player("Isamettin", "Aydin", "iSayD", Spaceships[0]));
 
             EnemySpaceships.Add(new Dart("Dart"));
             EnemySpaceships.Add(new B_Wings("B_Wings"));
@@ -83,15 +58,16 @@ namespace TP02
             EnemySpaceships.Add(new ViperMKII("ViperMKII"));
             EnemySpaceships.Add(new F_18("F_18"));
             EnemySpaceships.Add(new Tardis("Tardis"));
-
-
-            foreach (Player player in Players)
+            
+            foreach(Spaceship spaceship in EnemySpaceships)
             {
-                Spaceships.Add(player.BattleShip);
+                Spaceships.Add(spaceship);
             }
+            //ISRELOAD a utiliser dans playround voir 1.2
+            // + Q3.3
         }
 
-
+        //4.3.c
         private bool CanAttack(int i, int NumberOfEnemies)
         {
             Random random = new Random();
@@ -102,34 +78,57 @@ namespace TP02
             }
             else return false;
         }
+        
+        private int RandomEnemyToAttack()
+        {
+            Random random = new Random();
+            for (int i = EnemySpaceships.Count(); i > 0; i--)
+            {
+                int randomEnemy = random.Next(0, i);
+                if (!EnemySpaceships[randomEnemy].IsDestroyed)
+                {
+                    return randomEnemy;
+                }
+            }
+            return -1;
+        }
+        
         //4.3
         private void PlayRound()
         {
             Console.WriteLine("Debut du tour");
-            //4.3.a & 4.3.b
+            
+            //4.3.a
             for (int i = 0; i < EnemySpaceships.Count(); i++)
             {
                 if (!Players[0].BattleShip.IsDestroyed)
                 {
+                    //4.3.c
                     if (CanAttack(i, EnemySpaceships.Count()))
                     {
                         //le joueur est chanceux, il a le droit d'attaquer
-                        Console.WriteLine("Le joueur est chanceux il a le droit d'attaquer" + +i + " chance sur " + EnemySpaceships.Count() + ")");
-
-                        Random random = new Random();
-                        int randomEnemy = random.Next(0, EnemySpaceships.Count());
-
+                        Console.WriteLine("Le joueur attaque (" + i + " chance sur " + EnemySpaceships.Count() + ")");
+                        if (RandomEnemyToAttack() != -1)
+                        {
+                            Players[0].BattleShip.ShootTarget(EnemySpaceships[RandomEnemyToAttack()]);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Il ne reste plus de vaisseau enemi a attaquer, feliciations !");
+                            break;
+                        }
                     }
+                    //4.3.b
+                    EnemySpaceships[i].ShootTarget(Players[0].BattleShip);
                 }
                 else
                 {
-
+                    Console.WriteLine("Le vaisseau du joueurs est detruit, la partie est finie");
+                    break;
                 }
 
             }
-
             Console.WriteLine("Fin du tour");
-
         }
 
         private void ViewPlayers()
@@ -147,7 +146,14 @@ namespace TP02
             Console.WriteLine("Liste des vaisseaux : ");
             foreach (Spaceship spaceship in this.Spaceships)
             {
-                Console.WriteLine(spaceship.Name + " (owner : " + spaceship.Owner + ")");
+                if (spaceship.Owner != null)
+                {
+                    Console.WriteLine(spaceship.Name + " (owner : " + spaceship.Owner + ")");
+                }
+                else
+                {
+                    Console.WriteLine(spaceship.Name + " (owner : Ennemi )");
+                }
             }
             Console.Write("\n");
         }
@@ -156,7 +162,7 @@ namespace TP02
             Console.WriteLine("Liste des vaisseaux ennemis : ");
             foreach (Spaceship spaceship in this.EnemySpaceships)
             {
-                Console.WriteLine(spaceship.Name + " (owner : " + spaceship.Owner + ")");
+                Console.WriteLine(spaceship.Name + " (owner : Ennemi )");
             }
             Console.Write("\n");
         }

@@ -14,7 +14,6 @@ namespace TP02
             Shield = 0;
             CurrentStructure = Structure;
             CurrentShield = Shield;
-            //Weapons = new List<Weapon>();
         }
 
         public F_18(string name)
@@ -24,7 +23,6 @@ namespace TP02
             Shield = 0;
             CurrentStructure = Structure;
             CurrentShield = Shield;
-            //Weapons = new List<Weapon>();
         }
 
         //3.a.2

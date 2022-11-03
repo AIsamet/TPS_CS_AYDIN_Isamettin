@@ -13,7 +13,6 @@ namespace TP02
             Shield = 0;
             CurrentStructure = Structure;
             CurrentShield = Shield;
-            //Weapons = new List<Weapon>();
         }
 
         public Tardis(string name)
@@ -23,7 +22,6 @@ namespace TP02
             Shield = 0;
             CurrentStructure = Structure;
             CurrentShield = Shield;
-            //Weapons = new List<Weapon>();
         }
 
         public void UseAbility(List<Spaceship> spaceships)

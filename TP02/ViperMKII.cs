@@ -14,7 +14,6 @@ namespace TP02
             Shield = 15;
             CurrentStructure = Structure;
             CurrentShield = Shield;
-            //Weapons = new List<Weapon>();
             //2.d.1.c
             Weapons.Add(new Weapon("Mitrailleuse", 2, 3, Weapon.EWeaponType.Direct, 1));
             Weapons.Add(new Weapon("EMG", 1, 7, Weapon.EWeaponType.Explosive, 1.5));
@@ -28,7 +27,6 @@ namespace TP02
             Shield = 15;
             CurrentStructure = Structure;
             CurrentShield = Shield;
-            //Weapons = new List<Weapon>();
             //2.d.1.c
             Weapons.Add(new Weapon("Mitrailleuse", 2, 3, Weapon.EWeaponType.Direct, 1));
             Weapons.Add(new Weapon("EMG", 1, 7, Weapon.EWeaponType.Explosive, 1.5));

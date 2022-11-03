@@ -14,7 +14,6 @@ namespace TP02
             Shield = 5;
             CurrentStructure = Structure;
             CurrentShield = Shield;
-            //Weapons = new List<Weapon>();
             Weapons.Add(new Weapon("Torpille", 3, 3, Weapon.EWeaponType.Guided, 2));
         }
 
@@ -25,7 +24,6 @@ namespace TP02
             Shield = 5;
             CurrentStructure = Structure;
             CurrentShield = Shield;
-            //Weapons = new List<Weapon>();
             Weapons.Add(new Weapon("Torpille", 3, 3, Weapon.EWeaponType.Guided, 2));
         }
 
