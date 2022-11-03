@@ -26,33 +26,6 @@ namespace TP02
             //Weapons = new List<Weapon>();
         }
 
-        public override void ShootTarget(Spaceship target)
-        {
-            Random random = new Random();
-            Console.WriteLine("Vous passez a l'attaque ! ");
-
-            if (Weapons.Count() != 0)
-            {
-                int randomWeapon = random.Next(0, Weapons.Count());
-
-                if (target is Rocinante)
-                {
-                    target.TakeDamagesRocinante(Weapons[randomWeapon]);
-                }
-                else
-                {
-                    target.TakeDamages(Weapons[randomWeapon].Shoot());
-                }
-            }
-            else
-            {
-                Console.WriteLine("Tu n'a pas d'arme mon ami\n");
-                SpaceInvaders Game = SpaceInvaders.GetInstance;
-                UseAbility(Game.EnemySpaceships);
-
-            }
-        }
-
         public void UseAbility(List<Spaceship> spaceships)
         {
             SpaceInvaders Game = SpaceInvaders.GetInstance;

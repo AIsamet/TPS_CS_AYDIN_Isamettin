@@ -35,26 +35,6 @@ namespace TP02
             Weapons.Add(new Weapon("Missile", 4, 100, Weapon.EWeaponType.Guided, 4));
         }
 
-        //2.d.2
-        public override void ShootTarget(Spaceship target)
-        {
-            Random random = new Random();
-            Console.WriteLine("Vous passez a l'attaque ! ");
-
-            if (Weapons.Count() != 0)
-            {
-                int randomWeapon = random.Next(0, Weapons.Count());
-                if (target is Rocinante)
-                {
-                    target.TakeDamagesRocinante(Weapons[randomWeapon]);
-                }
-                else
-                {
-                    target.TakeDamages(Weapons[randomWeapon].Shoot());
-                }
-            }
-            else { Console.WriteLine("Tu n'a pas d'arme mon ami\n"); }
-        }
-
+        
     }
 }

@@ -223,7 +223,31 @@ namespace TP02
             }
         }
 
-        //2.4
-        public abstract void ShootTarget(Spaceship target);
+        //2.a.2 & 2.4
+        public void ShootTarget(Spaceship target)
+        {
+            Random random = new Random();
+            Console.WriteLine("Vous passez a l'attaque ! ");
+
+            if (Weapons.Count() != 0)
+            {
+                int randomWeapon = random.Next(0, Weapons.Count());
+
+                if (Weapons[randomWeapon].Type == Weapon.EWeaponType.Direct)
+                {
+                    Weapons[randomWeapon].TimeBeforReload = 1;
+                }
+
+                if (target is Rocinante)
+                {
+                    target.TakeDamagesRocinante(Weapons[randomWeapon]);
+                }
+                else
+                {
+                    target.TakeDamages(Weapons[randomWeapon].Shoot());
+                }
+            }
+            else { Console.WriteLine("Tu n'a pas d'arme mon ami\n"); }
+        }
     }
 }

@@ -29,31 +29,6 @@ namespace TP02
             Weapons.Add(new Weapon("Hammer", 1, 8, Weapon.EWeaponType.Explosive, 1.5));
         }
 
-        //2.b.2
-        public override void ShootTarget(Spaceship target)
-        {
-            Random random = new Random();
-            Console.WriteLine("Vous passez a l'attaque ! ");
-
-            if (Weapons.Count() != 0)
-            {
-                int randomWeapon = random.Next(0, Weapons.Count());
-
-                if (Weapons[randomWeapon].Type == Weapon.EWeaponType.Explosive)
-                {
-                    Weapons[randomWeapon].TimeBeforReload = 1;
-                }
-
-                if (target is Rocinante)
-                {
-                    target.TakeDamagesRocinante(Weapons[randomWeapon]);
-                }
-                else
-                {
-                    target.TakeDamages(Weapons[randomWeapon].Shoot());
-                }
-            }
-            else { Console.WriteLine("Tu n'a pas d'arme mon ami\n"); }
-        }
+       
     }
 }
