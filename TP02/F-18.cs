@@ -66,6 +66,8 @@ namespace TP02
                     if (player.BattleShip.IsDestroyed == false)
                     {
                         player.BattleShip.TakeDamages(10);
+                        this.CurrentShield = 0;
+                        this.CurrentStructure = 0;
                         break;
                     }
                 }
