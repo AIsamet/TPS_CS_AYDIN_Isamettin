@@ -37,7 +37,7 @@ namespace TP02
             myGame.EnemySpaceships.Add(myGame.Spaceships[1]);
             myGame.Players.Add(new Player("Dark", "Vador", "D4RK_V4D0R", myGame.Spaceships[1]));
 
-            myGame.Spaceships.Add(new Tardis("TEST"));
+            myGame.Spaceships.Add(new B_Wings("TEST"));
             myGame.EnemySpaceships.Add(myGame.Spaceships[2]);
             myGame.Players.Add(new Player("TEST", "TEST", "TEST", myGame.Spaceships[2]));
 
@@ -74,8 +74,8 @@ namespace TP02
             Spaceships = new List<Spaceship>();
             EnemySpaceships = new List<Spaceship>();
 
-            Spaceships.Add(new Rocinante("Faucon Millenium"));
-            Players.Add(new Player("Isamettin", "Aydin", "iSayD", Spaceships[0]));
+            //Spaceships.Add(new Rocinante("Faucon Millenium"));
+            //Players.Add(new Player("Isamettin", "Aydin", "iSayD", Spaceships[0]));
 
             EnemySpaceships.Add(new Dart("Dart"));
             EnemySpaceships.Add(new B_Wings("B_Wings"));

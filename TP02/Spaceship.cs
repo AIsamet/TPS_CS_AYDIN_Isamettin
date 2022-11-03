@@ -149,7 +149,7 @@ namespace TP02
         }
 
         //2.3
-        public void TakeDamages(double damages)
+        public virtual void TakeDamages(double damages)
         {
             if (CurrentShield > 0)
             {
@@ -172,59 +172,12 @@ namespace TP02
                     CurrentStructure = 0;
                 }
             }
-        }
-
-        //2.c.2
-        public void TakeDamagesRocinante(Weapon weapon)
-        {
-            Random random = new Random();
-            int chance;
-
-            if (weapon.Type == Weapon.EWeaponType.Direct)
-            {
-                chance = random.Next(1, 11); // creates a number between 1 and 10
-                if (chance == 1)
-                {
-                    if (weapon.Shoot() != 0)
-                    {
-                        Console.WriteLine("Attaque esquivé par Rocinante");
-                    }
-                }
-                else { TakeDamages(weapon.Shoot()); }
-                Console.WriteLine("------------------------------------------------------------\n");
-            }
-
-            else if (weapon.Type == Weapon.EWeaponType.Explosive)
-            {
-                chance = random.Next(1, 5); // creates a number between 1 and 4
-                if (chance == 1)
-                {
-                    if (weapon.Shoot() != 0)
-                    {
-                        Console.WriteLine("Attaque esquivé par Rocinante");
-                    }
-                }
-                else { TakeDamages(weapon.Shoot()); }
-                Console.WriteLine("------------------------------------------------------------\n");
-            }
-
-            else if (weapon.Type == Weapon.EWeaponType.Guided)
-            {
-                chance = random.Next(1, 5); // creates a number between 1 and 4
-                if (chance == 1 || chance == 2 || chance == 3)
-                {
-                    if (weapon.Shoot() != 0)
-                    {
-                        Console.WriteLine("Attaque esquivé par Rocinante");
-                    }
-                }
-                else { TakeDamages(weapon.Shoot()); }
-                Console.WriteLine("------------------------------------------------------------\n");
-            }
+            CurrentShield = Math.Round(CurrentShield, 1);
+            CurrentStructure = Math.Round(CurrentStructure, 1);
         }
 
         //2.a.2 & 2.4
-        public void ShootTarget(Spaceship target)
+        public virtual void ShootTarget(Spaceship target)
         {
             Random random = new Random();
             Console.WriteLine("Vous passez a l'attaque ! ");
@@ -232,22 +185,11 @@ namespace TP02
             if (Weapons.Count() != 0)
             {
                 int randomWeapon = random.Next(0, Weapons.Count());
+                target.TakeDamages(Weapons[randomWeapon].Shoot());
 
-                if (Weapons[randomWeapon].Type == Weapon.EWeaponType.Direct)
-                {
-                    Weapons[randomWeapon].TimeBeforReload = 1;
-                }
-
-                if (target is Rocinante)
-                {
-                    target.TakeDamagesRocinante(Weapons[randomWeapon]);
-                }
-                else
-                {
-                    target.TakeDamages(Weapons[randomWeapon].Shoot());
-                }
             }
             else { Console.WriteLine("Tu n'a pas d'arme mon ami\n"); }
+            Console.WriteLine("------------------------------------------------------------\n");
         }
     }
 }

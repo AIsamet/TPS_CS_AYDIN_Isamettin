@@ -21,7 +21,20 @@ namespace TP02
         public double ReloadTime { get; set; }
         //1.2 compteur de tours, il permettra de savoir si l’arme est utilisable ou si elle est entrain de recharger
         public double TimeBeforReload { get; set; }
-        public bool IsReload { get; }
+        public bool IsReload
+        {
+            get
+            {
+                if (TimeBeforReload == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
 
 
 
@@ -60,7 +73,7 @@ namespace TP02
             if (TimeBeforReload == 0)
             {
                 Random random = new Random();
-                double degats = (random.NextDouble() * (MaxDamage - MinDamage) + MinDamage);
+                double degats = Math.Round((random.NextDouble() * (MaxDamage - MinDamage) + MinDamage),1);
 
                 //1.3.d.1    
                 if (Type == EWeaponType.Direct)
@@ -69,43 +82,43 @@ namespace TP02
                     if (chance == 1)
                     {
                         degats = 0;
-                        Console.WriteLine("l'arme " + Name + " a raté sa cible\n");
+                        Console.WriteLine("\nL'arme " + Name + " a raté sa cible");
                         TimeBeforReload = ReloadTime;
                         return degats;
                     }
                     else
                     {
-                        Console.WriteLine("l'arme " + Name + " tire sur sa cible (degats estimés = " + degats + ")\n");
+                        Console.WriteLine("L'arme " + Name + " tire sur sa cible (degats estimés = " + degats + ")\n");
                         TimeBeforReload = ReloadTime;
                         return degats;
                     }
                 }
 
                 //1.3.d.2
-                if (Type == EWeaponType.Explosive)
+                else if (Type == EWeaponType.Explosive)
                 {
                     int chance = random.Next(1, 5); // creates a number between 1 and 4
                     if (chance == 1)
                     {
                         degats = 0;
-                        Console.WriteLine("l'arme " + Name + " a raté sa cible\n");
+                        Console.WriteLine("\nL'arme " + Name + " a raté sa cible");
                         TimeBeforReload = ReloadTime * 2;
                         return degats;
                     }
                     else
                     {
                         degats = degats * 2;
-                        Console.WriteLine("l'arme " + Name + " tire sur sa cible (degats estimés = " + degats + ")\n");
+                        Console.WriteLine("L'arme " + Name + " tire sur sa cible (degats estimés = " + degats + ")\n");
                         TimeBeforReload = ReloadTime * 2;
                         return degats;
                     }
                 }
 
                 //1.3.d.3
-                if (Type == EWeaponType.Guided)
+                else if (Type == EWeaponType.Guided)
                 {
                     degats = MinDamage;
-                    Console.WriteLine("l'arme " + Name + " tire sur sa cible (degats estimés = " + degats + ")\n");
+                    Console.WriteLine("L'arme " + Name + " tire sur sa cible (degats estimés = " + degats + ")\n");
                     TimeBeforReload = ReloadTime;
                     return degats;
                 }
