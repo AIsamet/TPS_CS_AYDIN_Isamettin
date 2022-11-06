@@ -6,9 +6,10 @@ namespace TP02
     //3.2
     public class Tardis : Spaceship, IAbility
     {
+        //3.b.1
         public Tardis()
         {
-            Name = "Default Name";
+            Name = "Tardis";
             Structure = 1;
             Shield = 0;
             CurrentStructure = Structure;
@@ -24,28 +25,38 @@ namespace TP02
             CurrentShield = Shield;
         }
 
+        //3.b.2
         public void UseAbility(List<Spaceship> spaceships)
         {
-            SpaceInvaders Game = SpaceInvaders.GetInstance;
-            Console.WriteLine(this.Name + " utilise son aptitude speciale");
-            Console.WriteLine("Tardis se teleporte !");
-
             Random random = new Random();
-            int randomVaisseau = random.Next(0, Game.EnemySpaceships.Count());
-            int randomPosition = random.Next(0, Game.EnemySpaceships.Count());
+            int randomVaisseau = random.Next(0, spaceships.Count());
+            int randomPosition = random.Next(0, spaceships.Count());
 
-            if (Game.EnemySpaceships.Count() != 1)
+            //on verifie que l'on deplace le vaisseau sur une nouvelle position
+            if (spaceships.Count() != 1)
             {
-                while (randomVaisseau == randomPosition)
+                while (randomVaisseau == randomPosition || randomVaisseau == spaceships.IndexOf(this))
                 {
-                    randomPosition = random.Next(0, Game.EnemySpaceships.Count());
+                    randomVaisseau = random.Next(0, spaceships.Count());
+                    randomPosition = random.Next(0, spaceships.Count());
                 }
             }
 
-            Spaceship temp = Game.EnemySpaceships[randomPosition];
-            Game.EnemySpaceships[randomPosition] = Game.EnemySpaceships[randomVaisseau];
-            Game.EnemySpaceships[randomVaisseau] = temp;
+            Console.WriteLine(this.Name + " utilise son aptitude speciale et teleporte le vaisseau " + spaceships[randomVaisseau].Name + "\n");
+
+            Spaceship temp = spaceships[randomPosition];
+            spaceships[randomPosition] = spaceships[randomVaisseau];
+            spaceships[randomVaisseau] = temp;
 
         }
+
+        //3.b.2
+        public override void ShootTarget(Spaceship target)
+        {
+            SpaceInvaders Game = SpaceInvaders.GetInstance;
+            UseAbility(Game.Spaceships);
+            Console.WriteLine("------------------------------------------------------------\n");
+        }
+
     }
 }

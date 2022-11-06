@@ -9,7 +9,7 @@ namespace TP02
         //3.a.1
         public F_18()
         {
-            Name = "Default Name";
+            Name = "F_18";
             Structure = 15;
             Shield = 0;
             CurrentStructure = Structure;
@@ -28,23 +28,43 @@ namespace TP02
         //3.a.2
         public void UseAbility(List<Spaceship> spaceships)
         {
-            if (spaceships[0] == this)
+
+            SpaceInvaders Game = SpaceInvaders.GetInstance;
+
+            //On recupere l'index du f-18 puis on verifie si i+1 ou i-1 correspond au vaisseau du joueur
+            for (int i = 0; i < spaceships.Count(); i++)
             {
-                SpaceInvaders Game = SpaceInvaders.GetInstance;
-                Console.WriteLine(this.Name + " utilise son aptitude speciale");
-                Console.WriteLine("EXPLOSION !");
-                foreach (Player player in Game.Players)
+                if (spaceships[i] == this)
                 {
-                    if (player.BattleShip.IsDestroyed == false)
+                    //si un vaisseau voisin est le vaisseau d'un joueur on l'attaque avec une verif pour pas etre out of range
+                    if ((i != 0 && spaceships[i - 1].BelongsPlayer) || spaceships[i + 1].BelongsPlayer)
                     {
-                        player.BattleShip.TakeDamages(10);
+                        Console.WriteLine(this.Name + " utilise son aptitude speciale\n");
+                        Console.WriteLine("Mode Kamikaze activé ! Les vaisseaux a proximité prennent 10 de degats\n");
+
+                        if (i != 0) { spaceships[i - 1].TakeDamages(10); }
+                        spaceships[i + 1].TakeDamages(10);
                         this.CurrentShield = 0;
                         this.CurrentStructure = 0;
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Pas de vaisseau joueur a proximite, F-18 ne peut pas utiliser son aptitude speciale\n");
                         break;
                     }
                 }
             }
         }
 
+        //3.a.2
+        public override void ShootTarget(Spaceship target)
+        {
+            SpaceInvaders Game = SpaceInvaders.GetInstance;
+            UseAbility(Game.Spaceships);
+            Console.WriteLine("------------------------------------------------------------\n");
+        }
+
     }
 }
+

@@ -9,7 +9,7 @@ namespace TP02
         //2.d.1
         public ViperMKII()
         {
-            Name = "Default Name";
+            Name = "ViperMKII";
             Structure = 10;
             Shield = 15;
             CurrentStructure = Structure;
@@ -33,6 +33,5 @@ namespace TP02
             Weapons.Add(new Weapon("Missile", 4, 100, Weapon.EWeaponType.Guided, 4));
         }
 
-        
     }
 }

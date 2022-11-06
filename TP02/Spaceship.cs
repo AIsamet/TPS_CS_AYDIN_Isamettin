@@ -28,10 +28,15 @@ namespace TP02
                 double moyenne = 0;
                 foreach (Weapon weapon in Weapons)
                 {
-                    moyenne += ((weapon.MaxDamage + weapon.MinDamage) / 2);
+                    moyenne += weapon.AverageDamage;
                 }
-                if ((moyenne / Weapons.Count()) > 0) { return moyenne; }
-                return 0;
+
+                if (Weapons.Count() != 0)
+                {
+                    moyenne = moyenne / Weapons.Count();
+                    return moyenne;
+                }
+                else { return 0; }
             }
         }
         public double CurrentStructure { get; set; }
@@ -69,8 +74,8 @@ namespace TP02
             Weapons = new List<Weapon>();
         }
 
-        //ON AJOUTE UNE ARME SEULEMENT SI ELLE EXISTE DANS L'ARMURERIE,
-        //SI ON A ACTUELLEMENT MOINS DE 3 ARMES ET QU'ON A PAS DEJA L'ARME SOUAHITEE
+        //on ajoute une arme seulement si elle existe dans l'armurerie
+        //et si on a actuellement moins de 3 armes et qu'on a pas deja l'arme souahitee
         public void AddWeapon(Weapon weapon)
         {
             if (Weapons.Count() < 3 && !CheckWeapon(weapon))
@@ -83,7 +88,7 @@ namespace TP02
         }
 
 
-        //ON REMOVE UNE ARME SEULEMENT SI ELLE EXISTE DANS NOTRE VAISSEAU
+        //on remove une arme seulement si elle existe dans notre vaisseau
         public void RemoveWeapon(Weapon oWeapon)
         {
             if (CheckWeapon(oWeapon))
@@ -112,7 +117,7 @@ namespace TP02
             else { Console.WriteLine(""); };
         }
 
-        //VERIFIE SI UNE ARME EST DEJA AJOUTE AU SPACESHIP
+        //fonction qui verifie si une arme est deja ajoute au spaceship
         public bool CheckWeapon(Weapon weapon)
         {
             foreach (Weapon w in Weapons)
@@ -135,16 +140,15 @@ namespace TP02
         public void RepairShield(double repair)
         {
             CurrentShield += repair;
+            if (CurrentShield > Shield) { CurrentShield = Shield; }
         }
 
+        //fonction qui recharge toutes les armes
         public void ReloadWeapons()
         {
             foreach (Weapon weapon in Weapons)
             {
-                if (weapon.TimeBeforReload > 1)
-                {
-                    weapon.TimeBeforReload -= 1;
-                }
+                weapon.TimeBeforReload = 0;
             }
         }
 
@@ -176,20 +180,17 @@ namespace TP02
             CurrentStructure = Math.Round(CurrentStructure, 1);
         }
 
-        //2.a.2 & 2.4
+        //2.4 & 2.d.2
         public virtual void ShootTarget(Spaceship target)
         {
             Random random = new Random();
-            Console.WriteLine(this.GetType().Name + " passe a l'attaque ! ");
+            Console.WriteLine(this.GetType().Name + " passe a l'attaque ! \n");
 
             if (Weapons.Count() != 0)
             {
                 int randomWeapon = random.Next(0, Weapons.Count());
                 double degatsAttaque = Weapons[randomWeapon].Shoot();
-                if (degatsAttaque != 0)
-                {
-                    target.TakeDamages(degatsAttaque);
-                }
+                target.TakeDamages(degatsAttaque);
             }
             else { Console.WriteLine("Tu n'a pas d'arme mon ami\n"); }
             Console.WriteLine("------------------------------------------------------------\n");
