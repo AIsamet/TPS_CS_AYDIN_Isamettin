@@ -36,7 +36,7 @@ namespace TP02
             {
                 if (spaceships[i] == this)
                 {
-                    //si un vaisseau voisin est le vaisseau d'un joueur on l'attaque avec verif`s pour pas etre out of range
+                    //si un vaisseau voisin est le vaisseau d'un joueur on l'attaque avec verifs pour pas etre out of range
                     if ((i-1 >=0 && spaceships[i - 1].BelongsPlayer) || (i+1 < spaceships.Count()  && spaceships[i + 1].BelongsPlayer))
                     {
 

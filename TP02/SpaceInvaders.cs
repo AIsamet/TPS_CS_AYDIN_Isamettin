@@ -53,8 +53,6 @@ namespace TP02
             }
 
             //4.5 Lancez le programme pour afficher une partie
-
-
         }
 
         //4.2
