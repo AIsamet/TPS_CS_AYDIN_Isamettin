@@ -129,7 +129,7 @@ namespace TP02
             }
 
             //1.3.b
-            Console.WriteLine("L'arme " + Name + " est entrain de recharger\nTours avant rechargement : " + TimeBeforReload + "\n");
+            Console.WriteLine("L'arme " + Name + " est entrain de recharger (tours avant rechargement : " + TimeBeforReload + ")\n");
             return 0;
 
         }

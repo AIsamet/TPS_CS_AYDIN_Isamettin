@@ -55,7 +55,7 @@ namespace TP02
         {
             SpaceInvaders Game = SpaceInvaders.GetInstance;
             UseAbility(Game.Spaceships);
-            Console.WriteLine("------------------------------------------------------------\n");
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------\n");
         }
 
     }

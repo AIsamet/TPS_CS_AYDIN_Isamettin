@@ -16,7 +16,7 @@ namespace TP02
             FirstName = Format(firstName);
             LastName = Format(lastName);
             Alias = alias;
-            BattleShip = new ViperMKII();
+            BattleShip = new Dart();
             BattleShip.Owner = this;
         }
 

@@ -36,7 +36,7 @@ namespace TP02
             //si  = 1 rociante esquive l'attaque
             if (chance == 1)
             {
-                Console.WriteLine("Le tir est raté ! Rocinante l'esquive");
+                Console.WriteLine("Rocinante esquive l'attaque\n");
             }
             //sinon prends les degats normalement
             else

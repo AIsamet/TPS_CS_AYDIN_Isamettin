@@ -155,36 +155,63 @@ namespace TP02
         //2.3
         public virtual void TakeDamages(double damages)
         {
-            if (CurrentShield > 0)
+            if (damages > 0)
             {
-                CurrentShield -= damages;
-                if (CurrentShield < 0)
+                if (CurrentShield > 0)
                 {
-                    CurrentStructure += CurrentShield;
-                    CurrentShield = 0;
+                    CurrentShield -= damages;
+                    if (CurrentShield < 0)
+                    {
+                        CurrentStructure += CurrentShield;
+                        CurrentShield = 0;
+                        if (CurrentStructure < 0)
+                        {
+                            CurrentStructure = 0;
+                        }
+                    }
+                }
+                else
+                {
+                    CurrentStructure -= damages;
                     if (CurrentStructure < 0)
                     {
                         CurrentStructure = 0;
                     }
                 }
-            }
-            else
-            {
-                CurrentStructure -= damages;
-                if (CurrentStructure < 0)
+
+                CurrentShield = Math.Round(CurrentShield, 1);
+                CurrentStructure = Math.Round(CurrentStructure, 1);
+
+                if (this.BelongsPlayer)
                 {
-                    CurrentStructure = 0;
+                    Console.WriteLine(this.GetType().Name + " (joueur : " + this.Owner.Alias + ") prends " + damages + " degats \n");
+                    if (this.IsDestroyed)
+                    {
+                        Console.WriteLine(this.GetType().Name + " est detruit \n");
+                    }
+                }
+                else if (!this.BelongsPlayer)
+                {
+                    Console.WriteLine(this.GetType().Name + " (joueur : Ennemi) prends " + damages + " degats \n");
+                    if (this.IsDestroyed)
+                    {
+                        Console.WriteLine(this.GetType().Name + " est detruit \n");
+                    }
                 }
             }
-            CurrentShield = Math.Round(CurrentShield, 1);
-            CurrentStructure = Math.Round(CurrentStructure, 1);
+        }
+
+        protected void DisplayAttackerProfile()
+        {
+            if (this.BelongsPlayer) { Console.WriteLine(this.GetType().Name + " (joueur : " + this.Owner.Alias + ") passe a l'attaque ! \n"); }
+            if (!this.BelongsPlayer) { Console.WriteLine(this.GetType().Name + " (joueur : Ennemi)  passe a l'attaque ! \n"); }
         }
 
         //2.4 & 2.d.2
         public virtual void ShootTarget(Spaceship target)
         {
             Random random = new Random();
-            Console.WriteLine(this.GetType().Name + " passe a l'attaque ! \n");
+            DisplayAttackerProfile();
 
             if (Weapons.Count() != 0)
             {
@@ -193,7 +220,7 @@ namespace TP02
                 target.TakeDamages(degatsAttaque);
             }
             else { Console.WriteLine("Tu n'a pas d'arme mon ami\n"); }
-            Console.WriteLine("------------------------------------------------------------\n");
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------\n");
         }
     }
 }

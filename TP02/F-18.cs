@@ -36,9 +36,10 @@ namespace TP02
             {
                 if (spaceships[i] == this)
                 {
-                    //si un vaisseau voisin est le vaisseau d'un joueur on l'attaque avec une verif pour pas etre out of range
-                    if ((i != 0 && spaceships[i - 1].BelongsPlayer) || spaceships[i + 1].BelongsPlayer)
+                    //si un vaisseau voisin est le vaisseau d'un joueur on l'attaque avec verif`s pour pas etre out of range
+                    if ((i-1 >=0 && spaceships[i - 1].BelongsPlayer) || (i+1 < spaceships.Count()  && spaceships[i + 1].BelongsPlayer))
                     {
+
                         Console.WriteLine(this.Name + " utilise son aptitude speciale\n");
                         Console.WriteLine("Mode Kamikaze activé ! Les vaisseaux a proximité prennent 10 de degats\n");
 
@@ -62,7 +63,7 @@ namespace TP02
         {
             SpaceInvaders Game = SpaceInvaders.GetInstance;
             UseAbility(Game.Spaceships);
-            Console.WriteLine("------------------------------------------------------------\n");
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------------\n");
         }
 
     }
