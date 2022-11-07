@@ -181,7 +181,7 @@ namespace TP02
                 {
                     int proba = i + 1;
                     //le joueur peut attaquer
-                    Console.WriteLine("Le joueur peut attaquer (probabilité " + proba + "/" + EnemySpaceships.Count() + ")");
+                    Console.WriteLine("Le joueur peut attaquer (probabilité " + proba + "/" + EnemySpaceships.Count() + ")\n");
                     if (RandomEnemyToAttack() != -1)
                     {
                         Players[0].BattleShip.ShootTarget(EnemySpaceships[RandomEnemyToAttack()]);
