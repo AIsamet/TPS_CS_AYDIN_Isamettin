@@ -37,14 +37,14 @@ namespace TP02
                 if (spaceships[i] == this)
                 {
                     //si un vaisseau voisin est le vaisseau d'un joueur on l'attaque avec verifs pour pas etre out of range
-                    if ((i-1 >=0 && spaceships[i - 1].BelongsPlayer) || (i+1 < spaceships.Count()  && spaceships[i + 1].BelongsPlayer))
+                    if ((i - 1 >= 0 && spaceships[i - 1].BelongsPlayer) || (i + 1 < spaceships.Count() && spaceships[i + 1].BelongsPlayer))
                     {
 
                         Console.WriteLine(this.Name + " utilise son aptitude speciale\n");
                         Console.WriteLine("Mode Kamikaze activé ! Les vaisseaux a proximité prennent 10 de degats\n");
 
-                        if (i != 0) { spaceships[i - 1].TakeDamages(10); }
-                        spaceships[i + 1].TakeDamages(10);
+                        if (i - 1 >= 0) { spaceships[i - 1].TakeDamages(10); }
+                        if (i + 1 < spaceships.Count()) { spaceships[i + 1].TakeDamages(10); }
                         this.CurrentShield = 0;
                         this.CurrentStructure = 0;
                         break;
