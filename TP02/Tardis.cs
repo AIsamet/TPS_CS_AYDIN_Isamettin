@@ -35,7 +35,7 @@ namespace TP02
             //on verifie que l'on deplace le vaisseau sur une nouvelle position
             if (spaceships.Count() != 1)
             {
-                while (randomVaisseau == randomPosition || randomVaisseau == spaceships.IndexOf(this))
+                while (randomVaisseau == randomPosition || randomVaisseau == spaceships.IndexOf(this) || spaceships[randomPosition].IsDestroyed)
                 {
                     randomVaisseau = random.Next(0, spaceships.Count());
                     randomPosition = random.Next(0, spaceships.Count());

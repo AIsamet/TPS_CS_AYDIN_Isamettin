@@ -140,7 +140,7 @@ namespace TP02
         {
             foreach (Spaceship spaceship in Spaceships)
             {
-                if (spaceship.CurrentShield < spaceship.Shield)
+                if (spaceship.CurrentShield < spaceship.Shield && !spaceship.IsDestroyed)
                 {
                     Random random = new Random();
                     int randomHeal = random.Next(0, 3); //genere des reparations entre 0 et 2
@@ -162,10 +162,10 @@ namespace TP02
             //sert a savoir si le joueur a deja attaqué
             bool playerAttacked = false;
 
-            //3.3 tout les vaisseaux ennemis ayant une abilité special attaquent au debut du tour
+            //3.3 tout les vaisseaux ennemis ayant une abilité special et non detruits attaquent au debut du tour
             foreach (Spaceship spaceship in EnemySpaceships)
             {
-                if (spaceship is IAbility)
+                if (spaceship is IAbility && !spaceship.IsDestroyed)
                 {
                     if (spaceship.BelongsPlayer) { Console.WriteLine("Le vaisseau " + spaceship.Name  +" (joueur : " + spaceship.Owner.Alias+ ") a une aptitude speciale et l'utilise\n"); }
                     else { Console.WriteLine("Le vaisseau " + spaceship.Name + " (joueur : Ennemi) a une aptitude speciale et l'utilise\n"); }
@@ -176,8 +176,8 @@ namespace TP02
             //4.3.a On joue dans l'ordre de la liste d'enemies
             for (int i = 0; i < EnemySpaceships.Count(); i++)
             {
-                //4.3.c
-                if (CanAttack(i, EnemySpaceships.Count()) && !playerAttacked)
+                //4.3.c le joueur peut attaquer s'il a de la chance, s'il n'a pas deja attaqué et s'il n'est pas detruit
+                if (CanAttack(i, EnemySpaceships.Count()) && !playerAttacked && !Players[0].BattleShip.IsDestroyed)
                 {
                     int proba = i + 1;
                     //le joueur peut attaquer
@@ -190,7 +190,8 @@ namespace TP02
                 }
 
                 //4.3.b tous les ennemis qui n'ont pas d'abilité special et qui sont toujours en jeu tirent sur le vaisseau du joueur
-                if (EnemySpaceships[i] is IAbility == false && !EnemySpaceships[i].IsDestroyed)
+                //si le vaisseau du joueur n'est pas encore deja detruit
+                if (EnemySpaceships[i] is IAbility == false && !EnemySpaceships[i].IsDestroyed && !Players[0].BattleShip.IsDestroyed)
                 {
                     EnemySpaceships[i].ShootTarget(Players[0].BattleShip);
                 }
