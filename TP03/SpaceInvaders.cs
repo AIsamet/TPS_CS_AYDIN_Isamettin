@@ -50,14 +50,14 @@ namespace TP03
 
                 //2.6 Affiche les 5 armes avec les plus gros dommages moyens, les 5 armes possédant les dommages minimums les plus hauts
                 Console.WriteLine("\n============================================== ORDER BY DEGATS MOY DESC =============================================================================\n");
-                Console.WriteLine("\nles 5 armes avec les plus gros dommages moyens :");
+                Console.WriteLine("\nLes 5 armes avec les plus gros dommages moyens :");
                 foreach (Weapon w in myGame.GameArmory.GetFiveHighestAverageDamageDesc())
                 {
                     Console.WriteLine("\t" + w.Name + " : " + w.AverageDamage);
                 }
 
                 Console.WriteLine("\n============================================== ORDER BY DEGATS MIN DESC =============================================================================\n");
-                Console.WriteLine("\nles 5 armes possédant les dommages minimums les plus hauts :");
+                Console.WriteLine("\nLes 5 armes possédant les dommages minimums les plus hauts :");
                 foreach (Weapon w in myGame.GameArmory.GetFiveHighestMinDamageWeaponsDesc())
                 {
                     Console.WriteLine("\t" + w.Name + " : " + w.MinDamage);
