@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
+using TP03;
 
 namespace TP02
 
@@ -26,29 +29,13 @@ namespace TP02
         {
 
             SpaceInvaders myGame = GetInstance;
+            string path = "C:\\Users\\isamet\\Desktop";
+            string fileName = "test.txt";
+            int wordMaxSize = 64;
+            string notAllowedWord = "azerty";
+            ArmeImporteur test = new ArmeImporteur(path, fileName, wordMaxSize, notAllowedWord);
 
-
-            //AFFICHAGE DES JOUEURS ET VAISSEAUX DE LA PARTIE
-            Console.WriteLine("======================================== JOUEURS ET VAISSEAUX DE LA PARTIE =======================================");
-            myGame.ViewPlayers();
-            myGame.ViewSpaceships();
-            myGame.ViewEnemySpaceships();
-
-            //DEBUT DU JEU 
-            Console.WriteLine("\n====================================================== JEU ======================================================\n");
-
-            while (!myGame.Players[0].BattleShip.IsDestroyed && myGame.GetCountNonDestroyedEnemies() != 0)
-            {
-                myGame.PlayRound();
-                if (myGame.Players[0].BattleShip.IsDestroyed)
-                {
-                    Console.WriteLine("Le vaisseau du joueur est detruit, malheureusement c'est perdu !");
-                }
-                else if (myGame.GetCountNonDestroyedEnemies() == 0)
-                {
-                    Console.WriteLine("Il ne reste plus de vaisseau ennemis, felicitation c'est gagné !");
-                }
-            }
+  
 
         }
 
@@ -139,7 +126,7 @@ namespace TP02
                     Random random = new Random();
                     int randomHeal = random.Next(0, 3); //genere des reparations entre 0 et 2
                     spaceship.RepairShield(randomHeal);
-                    Console.WriteLine("Le vaisseau " + spaceship.Name + " gagne " + randomHeal + " point de shield\n"); 
+                    Console.WriteLine("Le vaisseau " + spaceship.Name + " gagne " + randomHeal + " point de shield\n");
                 }
             }
         }
@@ -159,7 +146,7 @@ namespace TP02
             {
                 if (spaceship is IAbility && !spaceship.IsDestroyed)
                 {
-                    if (spaceship.BelongsPlayer) { Console.WriteLine("Le vaisseau " + spaceship.Name  +" (joueur : " + spaceship.Owner.Alias+ ") a une aptitude speciale et l'utilise\n"); }
+                    if (spaceship.BelongsPlayer) { Console.WriteLine("Le vaisseau " + spaceship.Name + " (joueur : " + spaceship.Owner.Alias + ") a une aptitude speciale et l'utilise\n"); }
                     else { Console.WriteLine("Le vaisseau " + spaceship.Name + " (joueur : Ennemi) a une aptitude speciale et l'utilise\n"); }
                     spaceship.ShootTarget(Players[0].BattleShip);
                 }
