@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TP02
+namespace TP03
 
 {
     public class B_Wings : Spaceship

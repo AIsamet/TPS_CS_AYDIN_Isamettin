@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using TP03;
 
-namespace TP02
+namespace TP03
 
 {
     public class SpaceInvaders
@@ -25,18 +20,87 @@ namespace TP02
             Init();
         }
 
-        private static void Main()
+        private static void Main(string[] args)
         {
+            //2.6 appel de la seconde fonction main si un parametre est renseigné
+            if (args.Length > 0)
+            {
+                Main(args[0]);
+            }
+            else
+            {
+                string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\Words.txt";
+                SpaceInvaders myGame = GetInstance;
+                int wordMinSize = 6;
 
+                ArmeImporteur importer = new ArmeImporteur(path);
+                importer.blacklistedWords.Add("Midnight");
+
+                Console.WriteLine("\n====================================================== FREQUENCES ===================================================================================\n");
+                importer.ReadFile(path, wordMinSize);
+
+                Console.WriteLine("\n====================================================== ARMURERIE ====================================================================================\n");
+                myGame.GameArmory.ViewArmory();
+
+                Console.WriteLine("\n============================================== EXPORT DANS L'ARMURERIE ==============================================================================\n");
+                importer.WeaponExporter();
+
+                Console.WriteLine("\n====================================================== ARMURERIE ====================================================================================\n");
+                myGame.GameArmory.ViewArmory();
+
+                //2.6 Affiche les 5 armes avec les plus gros dommages moyens, les 5 armes possédant les dommages minimums les plus hauts
+                Console.WriteLine("\n============================================== ORDER BY DEGATS MOY DESC =============================================================================\n");
+                Console.WriteLine("\nles 5 armes avec les plus gros dommages moyens :");
+                foreach (Weapon w in myGame.GameArmory.GetFiveHighestAverageDamageDesc())
+                {
+                    Console.WriteLine("\t" + w.Name + " : " + w.AverageDamage);
+                }
+
+                Console.WriteLine("\n============================================== ORDER BY DEGATS MIN DESC =============================================================================\n");
+                Console.WriteLine("\nles 5 armes possédant les dommages minimums les plus hauts :");
+                foreach (Weapon w in myGame.GameArmory.GetFiveHighestMinDamageWeaponsDesc())
+                {
+                    Console.WriteLine("\t" + w.Name + " : " + w.MinDamage);
+                }
+            }
+        }
+
+        //2.5 seconde fonction Main, permettant de passer en arguments du programme le fichier d’entrée
+        private static void Main(string chemin)
+        {
+            string path = chemin;
             SpaceInvaders myGame = GetInstance;
-            string path = "C:\\Users\\isamet\\Desktop";
-            string fileName = "test.txt";
-            int wordMaxSize = 64;
-            string notAllowedWord = "azerty";
-            ArmeImporteur test = new ArmeImporteur(path, fileName, wordMaxSize, notAllowedWord);
+            int wordMinSize = 6;
 
-  
+            ArmeImporteur importer = new ArmeImporteur(path);
+            importer.blacklistedWords.Add("Midnight");
 
+            Console.WriteLine("\n====================================================== FREQUENCES ======================================================\n");
+            importer.ReadFile(path, wordMinSize);
+
+            Console.WriteLine("\n====================================================== ARMURERIE =======================================================\n");
+            myGame.GameArmory.ViewArmory();
+
+            Console.WriteLine("\n============================================== EXPORT DANS L'ARMURERIE =================================================\n");
+            importer.WeaponExporter();
+
+            Console.WriteLine("\n====================================================== ARMURERIE =======================================================\n");
+            myGame.GameArmory.ViewArmory();
+
+            //2.6 Affiche les 5 armes avec les plus gros dommages moyens, les 5 armes possédant les dommages minimums les plus hauts
+            Console.WriteLine("\n============================================== ORDER BY DEGATS MOY DESC ================================================\n");
+            Console.WriteLine("\nles 5 armes avec les plus gros dommages moyens :");
+            foreach (Weapon w in myGame.GameArmory.GetFiveHighestAverageDamageDesc())
+            {
+                Console.WriteLine("\t" + w.Name + " : " + w.AverageDamage);
+            }
+
+            Console.WriteLine("\n============================================== ORDER BY DEGATS MIN DESC ================================================\n");
+            Console.WriteLine("\nles 5 armes possédant les dommages minimums les plus hauts :");
+            foreach (Weapon w in myGame.GameArmory.GetFiveHighestMinDamageWeaponsDesc())
+            {
+                Console.WriteLine("\t" + w.Name + " : " + w.MinDamage);
+            }
         }
 
         private void Init()

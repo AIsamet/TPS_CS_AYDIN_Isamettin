@@ -1,7 +1,7 @@
 ﻿using System;
-using static TP02.Weapon;
+using static TP03.Weapon;
 
-namespace TP02
+namespace TP03
 {
     public interface IWeapon
     {
